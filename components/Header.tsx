@@ -36,7 +36,7 @@ function Header() {
         },
         {
             title: "Call for Papers",
-            link: "/",
+            link: "/papers",
         },
         {
             title: "Publication",

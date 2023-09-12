@@ -1,9 +1,6 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import Head from 'next/head'
-import Header from '@/components/Header'
+import Landing from '@/components/Landing'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -11,8 +8,8 @@ export default function Home() {
           <Head>
             <title>ICACST-23</title>
           </Head>
-          <main className='w-full text-montserrat'>
-            {/* <Header /> */}
+          <main className='w-full font-montserrat'>
+            <Landing/>
           </main>
     </div>
   )

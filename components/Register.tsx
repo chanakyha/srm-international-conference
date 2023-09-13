@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
@@ -13,6 +13,7 @@ import {
   } from "@/components/ui/select"
 
 function Register() {
+  const [category, setCategory] = useState<String>("");
 
 
     const addNewUser = async (e: any) => {
@@ -21,7 +22,7 @@ function Register() {
           name: e.target[0].value.trim(),
           email: e.target[1]?.value.trim(),
           mobile: e.target[2]?.value.trim(),
-          category: e.target[3]?.value.trim(),
+          category: category,
           organization: e.target[4]?.value.trim(),
         };
     
@@ -57,7 +58,7 @@ function Register() {
             <Label htmlFor="username" className="text-left font-semibold">
               Category
             </Label>
-            <Select>
+            <Select onValueChange={(e) => setCategory(e)}>
                 <SelectTrigger>
                     <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
@@ -80,7 +81,7 @@ function Register() {
             <Input id="orgnanization" placeholder="Name of Orgnanization/School/College" />
         </div>
         <div className="mt-8 ">
-            <Button variant={"default"} className='w-full'>Register</Button>
+            <Button type='submit' variant={"default"} className='w-full'>Register</Button>
         </div>
       </form>
     </div>

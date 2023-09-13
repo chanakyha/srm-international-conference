@@ -42,15 +42,15 @@ function Header() {
         },
         {
             title: "Publication",
-            link: "/",
+            link: "/publications",
         },
         {
             title: "Contact Us",
-            link: "/contact",
+            link: "/#contact",
         },
     ];
     return (
-        <header className="font-montserrat sticky z-50 top-0 bg-white">
+        <header className="font-montserrat sticky z-50 top-0 border-b bg-white">
             <div className="p-4 container mx-auto flex items-center justify-between h-20">
                 <Link href="/" className="flex items-center justify-center">
                     <span className="ml-4 uppercase font-black text-2xl">

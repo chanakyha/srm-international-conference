@@ -102,20 +102,21 @@ export default Register
 
 
 
-export  function getServerSideProps(context:any) {
-    const session = getServerSession(context.req, context.res, authOptions);
-    // if (session?.user!.name) {
-    //   return {
-    //     redirect: {
-    //       destination: "/",
-    //       permanent: false,
-    //     },
-    //   };
-    // }
-    
-    return {
-      props: {
-        session,
-      },
-    };
-}
+// export function getServerSideProps(context:any) {
+//     const session = getServerSession(context.req, context.res, authOptions);
+//     console.log("session")
+//     if (session?.user?.name) {
+//       return {
+//         redirect: {
+//           destination: "/",
+//           permanent: false,
+//         },
+//       };
+//     }
+  
+//     return {
+//       props: {
+//         session,
+//       },
+//     };
+// }

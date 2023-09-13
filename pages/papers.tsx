@@ -4,7 +4,7 @@ const Paper = () => {
   return (
     <div>
       <LandingPageLayout>
-       <Cop/>
+        <Cop/>
       </LandingPageLayout>
     </div>
   );

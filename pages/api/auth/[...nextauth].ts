@@ -11,7 +11,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ profile }) {
       const docRef = doc(db, "users", profile?.email!);
-      await setDoc(docRef, profile);
+      await setDoc(docRef, {...profile, registered: false});
       return true;
     },
   },

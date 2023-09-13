@@ -3,6 +3,7 @@ import React from 'react';
 import Pic from '../public/assets/Pic.jpg';
 import { Twitter } from 'lucide-react';
 import { Linkedin } from 'lucide-react';
+import LandingPageLayout from '@/layout/LandingPageLayout';
 
 interface SpeakerProps {
   name: string,
@@ -35,8 +36,10 @@ const SPEAKERS: SpeakerProps[] = [
 
 function Speakers() {
   return (
+    <LandingPageLayout>
+
     <div className="container  mx-auto w-full h-full">
-    <h1 className='text-xl font-bold text-center my-10'>Speakers</h1>
+    <h1 className='text-4xl font-bold text-center my-10'>Speakers</h1>
     <div className="flex flex-wrap gap-4 overflow-hidden p-10 h-full">
       {
             SPEAKERS.map((card,idx) => (
@@ -57,6 +60,7 @@ function Speakers() {
           }
     </div>
   </div>
+    </LandingPageLayout>
   )
 }
 

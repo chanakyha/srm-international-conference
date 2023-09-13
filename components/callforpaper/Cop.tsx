@@ -58,8 +58,9 @@ function CallForPaper() {
   return (
     <section>
       <div className="w-11/12 md:w-[80%] mx-auto max-w-7xl h-[calc(100vh-5rem)]">
-        <h1 className="text-xl font-bold text-center my-10">Call for Paper</h1>
-        <div className="p-4">
+        <h1 className="text-4xl font-bold text-center my-10">Call for Paper</h1>
+        <p className="text-gray-500 text-base md:px-16 text-center">All submitted articles should report novel and unpublished research results on experimental or theoretical basis. Articles submitted to ViTECoN, 2023 should fall under any one domain mentioned below and must not be under consideration for publication elsewhere.</p>
+        <div className="p-4 my-10">
           {accordionsData.map((accordion, index) => (
             <Accordion key={index} type="single" collapsible>
               <AccordionItem value={accordion.id}>
@@ -67,7 +68,7 @@ function CallForPaper() {
                 <AccordionContent className="w-full">
                   <ul>
                     {accordion.answer.map((item, i) => (
-                      <li key={i}>{item}</li>
+                      <li className="pl-2 text-gray-500 text-base " key={i}>{"• "+item}</li>
                     ))}
                   </ul>
                 </AccordionContent>

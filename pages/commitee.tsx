@@ -1,3 +1,4 @@
+import LandingPageLayout from "@/layout/LandingPageLayout";
 import React from "react";
 
 const committeeMembers = [
@@ -30,6 +31,8 @@ const committeeMembers = [
 
 export const Committee = () => {
   return (
+    <LandingPageLayout>
+
     <div className="w-11/12 md:w-[80%] mx-auto max-w-7xl h-[calc(100vh-5rem)]">
       <div>
         <h1 className="text-xl font-bold text-center my-10">COMMITEE MEMBERS</h1>
@@ -49,6 +52,7 @@ export const Committee = () => {
         ))}
       </div>
     </div>
+    </LandingPageLayout>
   );
 };
 

@@ -29,7 +29,7 @@ const Footer = () => {
                                 >
                                     <Image
                                         src={"/assets/srmlogo.webp"}
-                                        alt="Codelance Devs"
+                                        alt="SRMIST Logo"
                                         width={100}
                                         height={100}
                                         className=" h-auto w-56 md:ml-[12px] lg:mb-0"

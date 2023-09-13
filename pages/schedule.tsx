@@ -1,7 +1,8 @@
+import LandingPageLayout from '@/layout/LandingPageLayout';
 import React from 'react'
 
 interface ScheduleProps {
-  key: number,
+  key: any,
   title: string,
   desc: string,
   pos: string,
@@ -9,7 +10,7 @@ interface ScheduleProps {
 
 const SCHEDULE: ScheduleProps[] = [
   {
-    key: 1,
+    key: "08:00 AM",
     title: "Lorem Ipsum",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     pos: "right-timeline",
@@ -37,8 +38,9 @@ const SCHEDULE: ScheduleProps[] = [
 
 function Schedule() {
   return (
+    <LandingPageLayout>
       <div className="container  mx-auto w-full h-full">
-          <h1 className="text-xl font-bold text-center my-10">Schedule</h1>
+          <h1 className="text-xl lg:text-4xl font-bold text-center my-10">Schedule</h1>
           <div className="relative wrap overflow-hidden p-10 h-full md:block hidden">
               <div className="border-2-2 absolute border-opacity-20 border-gray-700 h-full border left-1/2"></div>
               {SCHEDULE.map((card, idx) => (
@@ -49,12 +51,12 @@ function Schedule() {
                       } ${card.pos}`}
                   >
                       <div className="order-1 w-5/12"></div>
-                      <div className="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full">
-                          <h1 className="mx-auto font-semibold text-lg text-white">
+                      <div className="z-20 flex items-center order-1 bg-gray-800 shadow-xl py-2 px-4  rounded-full">
+                          <h1 className="mx-auto font-semibold text-base text-white">
                               {card.key}
                           </h1>
                       </div>
-                      <div className="order-1 bg-stone-100 text-gray-800 rounded-lg shadow-xl w-5/12 px-6 py-4 transition-all duration-300 hover:-translate-y-1">
+                      <div className="order-1 bg-stone-100 text-gray-800 rounded-lg shadow-md w-5/12 px-6 py-4 transition-all duration-300 hover:-translate-y-1">
                           <h3 className="mb-3 font-bold  text-lg">
                               {card.title}
                           </h3>
@@ -84,6 +86,7 @@ function Schedule() {
               </ol>
           </div>
       </div>
+    </LandingPageLayout>
   );
 }
 

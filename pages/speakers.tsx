@@ -36,20 +36,20 @@ const SPEAKERS: SpeakerProps[] = [
 function Speakers() {
   return (
     <div className="container  mx-auto w-full h-full">
-    <h1 className='text-4xl font-bold text-center my-10'>Speakers</h1>
+    <h1 className='text-xl font-bold text-center my-10'>Speakers</h1>
     <div className="flex flex-wrap gap-4 overflow-hidden p-10 h-full">
       {
             SPEAKERS.map((card,idx) => (
 
       
-<div key={idx} className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-blue-700 hover:text-white transition-all duration-300 hover:scale-105 group ">
+<div key={idx} className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:-translate-y-1 transition-all duration-300 group ">
     <div className="flex flex-col items-center justify-center p-10">
         <Image className="w-24 h-24 mb-3 rounded-full shadow-lg" src={Pic} alt="Pic"/>
-        <h5 className="mb-1 text-xl font-medium ">{card.name}</h5>
-        <span className="text-sm text-gray-500 group-hover:text-white ">{card.desg}</span>
-        <div className="flex mt-4 space-x-3 md:mt-6 text-gray-500 group-hover:text-white">
-            <Twitter className='w-5 h-5' />
-            <Linkedin className='w-5 h-5' />
+        <h5 className="mb-1 text-lg font-medium ">{card.name}</h5>
+        <span className="text-sm text-gray-500">{card.desg}</span>
+        <div className="flex mt-4 space-x-3 md:mt-6 text-gray-500">
+            <Twitter strokeWidth={1.5} className='w-5 h-5' />
+            <Linkedin strokeWidth={1.5} className='w-5 h-5' />
         </div>
     </div>
 </div>

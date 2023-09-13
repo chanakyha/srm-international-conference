@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
@@ -11,21 +11,31 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import { useSession } from 'next-auth/react'
+import { doc, setDoc } from 'firebase/firestore'
+import { db } from '@/backend/firebase'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 
 function Register() {
-
+  const [category, setCategory] = useState<String>("");
+  const {data:session} = useSession()
 
     const addNewUser = async (e: any) => {
-        e.preventDefault();
+      e.preventDefault();
+      if (!session?.user?.email) return;
         var newUser = {
           name: e.target[0].value.trim(),
           email: e.target[1]?.value.trim(),
           mobile: e.target[2]?.value.trim(),
-          category: e.target[3]?.value.trim(),
+          category: category,
           organization: e.target[4]?.value.trim(),
         };
-    
-        console.log(newUser);
+        
+
+        const docRef = doc(db, "users", session?.user?.email)
+        await setDoc(docRef, {...newUser, registered: true})
+        alert("Registered Successfully")
       };
   return (
     <div className="mx-auto w-full h-full">
@@ -57,7 +67,7 @@ function Register() {
             <Label htmlFor="username" className="text-left font-semibold">
               Category
             </Label>
-            <Select>
+            <Select onValueChange={(e) => setCategory(e)}>
                 <SelectTrigger>
                     <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
@@ -80,7 +90,7 @@ function Register() {
             <Input id="orgnanization" placeholder="Name of Orgnanization/School/College" />
         </div>
         <div className="mt-8 ">
-            <Button variant={"default"} className='w-full'>Register</Button>
+            <Button type='submit' variant={"default"} className='w-full'>Register</Button>
         </div>
       </form>
     </div>
@@ -89,3 +99,24 @@ function Register() {
 }
 
 export default Register
+
+
+
+// export function getServerSideProps(context:any) {
+//     const session = getServerSession(context.req, context.res, authOptions);
+//     console.log("session")
+//     if (session?.user?.name) {
+//       return {
+//         redirect: {
+//           destination: "/",
+//           permanent: false,
+//         },
+//       };
+//     }
+  
+//     return {
+//       props: {
+//         session,
+//       },
+//     };
+// }

@@ -57,14 +57,14 @@ const accordionsData = [
 function CallForPaper() {
   return (
     <section>
-      <div className="w-11/12 md:w-[80%] mx-auto max-w-7xl">
-        <h1 className="text-4xl font-bold text-center my-10">Call for Paper</h1>
-        <div className="bg-slate-50 p-4">
+      <div className="w-11/12 md:w-[80%] mx-auto max-w-7xl h-[calc(100vh-5rem)]">
+        <h1 className="text-xl font-bold text-center my-10">Call for Paper</h1>
+        <div className="p-4">
           {accordionsData.map((accordion, index) => (
             <Accordion key={index} type="single" collapsible>
               <AccordionItem value={accordion.id}>
                 <AccordionTrigger>{accordion.question}</AccordionTrigger>
-                <AccordionContent>
+                <AccordionContent className="w-full">
                   <ul>
                     {accordion.answer.map((item, i) => (
                       <li key={i}>{item}</li>

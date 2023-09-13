@@ -34,7 +34,7 @@ function Header() {
         },
         {
             title: "Committee",
-            link: "/",
+            link: "/commitee",
         },
         {
             title: "Call for Papers",

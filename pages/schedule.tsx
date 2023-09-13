@@ -39,7 +39,7 @@ function Schedule() {
   return (    
   <div className="container  mx-auto w-full h-full">
     <h1 className='text-4xl font-bold text-center my-10'>Schedule</h1>
-    <div className="relative wrap overflow-hidden p-10 h-full">
+    <div className="relative wrap overflow-hidden p-10 h-full md:block hidden">
       <div className="border-2-2 absolute border-opacity-20 border-gray-700 h-full border left-1/2" ></div>
       {
             SCHEDULE.map((card,idx) => (
@@ -59,6 +59,20 @@ function Schedule() {
 
       
     </div>
+    <div className='md:hidden block'>
+      <ol className="relative border-l border-gray-200 ">
+      {
+            SCHEDULE.map((card,idx) => (
+          <li key={idx} className="mb-10 ml-4">
+              <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white "></div>
+              <span className="mb-1 text-sm font-normal leading-none text-gray-400 ">{card.key}</span>
+              <h3 className="text-lg font-semibold text-gray-900 ">{card.title}</h3>
+              <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{card.desc}</p>
+          </li>
+            ))}             
+      </ol>
+    </div>
+
   </div>
   )
 }

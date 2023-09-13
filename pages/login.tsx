@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { getServerSession } from "next-auth";
+// import { getServerSession } from "next-auth";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from "./api/auth/[...nextauth]";
 

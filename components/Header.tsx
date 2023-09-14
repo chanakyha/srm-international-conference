@@ -51,14 +51,14 @@ function Header() {
     ];
     return (
         <header className="font-montserrat sticky z-50 top-0 border-b bg-white">
-            <div className="p-4 container mx-auto flex items-center justify-between h-20">
+            <div className="p-4 md:px-16 flex items-center justify-between h-20">
                 <Link href="/" className="flex items-center justify-center">
-                    <span className="ml-4 uppercase font-black text-2xl">
+                    <span className="uppercase font-black text-2xl">
                         ICACST-23
                     </span>
                 </Link>
-                <nav className="contents font-semibold ">
-                    <ul className="mx-auto lg:flex items-center text-slate-300 hidden">
+                <nav className="lg:flex font-semibold hidden">
+                    <ul className="mx-auto lg:flex items-center text-slate-300">
                         {NAVLINKS.map(({ title, link }, idx) => (
                             <li
                                 key={idx}
@@ -71,7 +71,7 @@ function Header() {
                         ))}
                     </ul>
                 </nav>
-                <div className="lg:hidden">
+                <div className="lg:hidden block ml-auto">
                     <Sheet>
                         <SheetTrigger>
                             <Menu strokeWidth={1.5} size={24} />
@@ -106,12 +106,22 @@ function Header() {
                         </SheetContent>
                     </Sheet>
                 </div>
-    
+
                 <div>
                     {session ? (
-                        <Button className="font-bold px-8 py-2 lg:flex flex-row hidden" onClick={() => signOut()}><span className="text-mont">Logout</span></Button>
+                        <Button
+                            className="font-bold px-8 py-2 lg:flex flex-row hidden"
+                            onClick={() => signOut()}
+                        >
+                            <span className="text-mont">Logout</span>
+                        </Button>
                     ) : (
-                        <Button className="font-bold px-8 py-2 lg:flex flex-row hidden" onClick={() => signIn("google")}><span className="text-mont">Login</span></Button>
+                        <Button
+                            className="font-bold px-8 py-2 lg:flex flex-row hidden"
+                            onClick={() => signIn("google")}
+                        >
+                            <span className="text-mont">Login</span>
+                        </Button>
                     )}
                 </div>
             </div>

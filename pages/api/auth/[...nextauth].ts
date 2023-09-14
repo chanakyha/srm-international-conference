@@ -11,7 +11,13 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ profile }) {
       const docRef = doc(db, "users", profile?.email!);
-      await setDoc(docRef, { ...profile, registered: true });
+      const currentUser = await getDoc(docRef)
+      console.log(currentUser.data());
+      if (currentUser?.data()?.registered) {
+        return true;
+      }else{
+        await setDoc(docRef, { ...profile, registered: false });
+      }
       return true;
     },
     async redirect({ baseUrl }) {

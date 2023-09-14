@@ -16,17 +16,19 @@ import { doc, setDoc } from 'firebase/firestore'
 import { db } from '@/backend/firebase'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
+import { useRouter } from 'next/router'
 
 function Register() {
   const [category, setCategory] = useState<String>("");
-  const {data:session} = useSession()
+  const {data:session} = useSession();
+  const router = useRouter();
 
     const addNewUser = async (e: any) => {
       e.preventDefault();
       if (!session?.user?.email) return;
         var newUser = {
           name: e.target[0].value.trim(),
-          email: e.target[1]?.value.trim(),
+          email: session?.user?.email,
           mobile: e.target[2]?.value.trim(),
           category: category,
           organization: e.target[4]?.value.trim(),
@@ -35,7 +37,9 @@ function Register() {
 
         const docRef = doc(db, "users", session?.user?.email)
         await setDoc(docRef, {...newUser, registered: true})
+        router.push('/dashboard')
         alert("Registered Successfully")
+        
       };
   return (
     <div className="mx-auto w-full h-full">
@@ -55,7 +59,8 @@ function Register() {
             <Label htmlFor="email" className="text-left font-semibold">
               Email
             </Label>
-            <Input id="email" placeholder="Email" />
+            {/* @ts-ignore */}
+            <Input id="email" placeholder="Email" value={session?.user?.email} disabled/>
         </div>
         <div className="flex flex-col gap-2 my-4">
             <Label htmlFor="phone" className="text-left font-semibold">

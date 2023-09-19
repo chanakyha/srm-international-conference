@@ -14,7 +14,7 @@ function Hero() {
           <span>Department of computer science and engineering</span>
         </div>
         <h1 className="text-2xl md:text-3xl lg:text-6xl font-black text-center">
-          ICACST&apos;23
+          ICACST &apos;23
         </h1>
         <div className="text-center">
           <p className="font-mono text-base lg:text-lg tracking-wider">
@@ -22,12 +22,12 @@ function Hero() {
             Technologies
           </p>
         </div>
-        <Button
+        {/* <Button
           asChild
           className="bg-black md:mx-auto md:w-fit text-white rounded-md font-bold px-8 py-2 "
         >
           <Link href="/schedule">View Schedule</Link>
-        </Button>
+        </Button> */}
       </div>
     </section>
   );

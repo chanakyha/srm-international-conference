@@ -35,7 +35,7 @@ const Footer = () => {
                                         className=" h-auto w-56 md:ml-[12px] lg:mb-0"
                                     />
                                     <h1 className=" text-2xl tracking-widest font-bold lg:mb-0">
-                                        ICACST&apos;23
+                                        ICACST &apos;23
                                     </h1>
                                 </Link>
                                 <div className="text-center lg:text-left lg:w-96">

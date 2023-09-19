@@ -4,10 +4,8 @@ import React from 'react'
 const PublicationsPage = () => {
 
     const publications = [
-        "All the registered and presented papers will be published in conference proceedings with ISBN number.",
-        "The proceedings of ViTECoN 2023 will be indexed to IEEE Xplore Digital library & SCOPUS.",
-        "Proceedings of the previous edition of the ViTECoN (2019) conference series have been published in the IEEE Xplore digital library successfully.",
-
+        "All accepted papers will be published in the conference proceedings with ISBN number.",
+        "All presented papers will be published in SCI / SCOPUS / WOS / UGC CARE based on author's interest.",
     ];
     return (
         <LandingPageLayout>

@@ -122,7 +122,7 @@ function CallForPaper() {
         <p className="text-gray-500 text-base md:px-16 text-center">
           All submitted articles should report novel and unpublished research
           results on experimental or theoretical basis. Articles submitted to
-          ICACST'23, 2023 should fall under any one domain mentioned below and
+          ICACST&apos;23, should fall under any one domain mentioned below and
           must not be under consideration for publication elsewhere.
         </p>
         <div className="p-4 my-10">

@@ -103,14 +103,12 @@ const accordionsData = [
 
 const instructionsData = [
   "All submissions must be in English and include a brief abstract. It will be evaluated by independent experts (at least three) in the Blind peer review process.",
-  "All pages must be numbered in the same order. Tables and figures can be included within the text or placed on other pages with appropriate caption(s).",
+  "The Papers should have 4 to 6 pages and all pages must be numbered in the same order. Tables and figures can be included within the text or placed on other pages with appropriate caption(s).",
   "The title of the paper, the author's name(s), and entire institutional affiliation(s) should all be mentioned on the first page of the manuscript. There should also be an abbreviated title (for running heads).",
   "A list of 4—6 keywords should be provided immediately after the abstract. These keywords should be relatively independent (coordinate index terms) and should best describe the paper as a whole.",
-  "Footnotes should be numbered alphabetically and inserted at the end of a text page, apart from acknowledgements and grant information (not to be listed separately).",
   "Authors should mention computing requirements (Hardware & Software) as well as performance issues.",
   "Authors should mention the type of paper (Research/Review/Case Study/Short Communication) on the first page of the manuscript.",
   "Submissions that do not follow the above instructions may be returned to the authors for correction before being published.",
-  
 ];
 
 function CallForPaper() {
@@ -149,17 +147,17 @@ function CallForPaper() {
           ))}
         </div>
         <div className="flex flex-col md:ml-auto md:flex-row md:w-1/2 gap-4 items-center">
-          <Button asChild className="w-full" variant={"outline"}>
-            <Link target="_blank" href="/assets/Template.pdf">
-              Download Template
-            </Link>
-          </Button>
-          <Button asChild className="w-full" variant={"outline"}>
+          <Button asChild className="w-full invisible">
             <Link
               target="_blank"
               href="https://www.springer.com/journal/44230/submission-guidelines"
             >
               Submission Guidlines
+            </Link>
+          </Button>
+          <Button asChild className="w-full">
+            <Link target="_blank" href="/assets/Template.pdf">
+              Download Template
             </Link>
           </Button>
         </div>

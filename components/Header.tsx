@@ -59,7 +59,7 @@ function Header() {
       <div className="p-4 md:px-16 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center justify-center">
            <Image
-                                        src={"/assets/icacst23.png"}
+                                        src={"/assets/icacst23-1.png"}
                                         alt="SRMIST Logo"
                                         width={10000}
                                         height={10000}

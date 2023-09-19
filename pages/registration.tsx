@@ -47,7 +47,7 @@ const Registration = () => {
         </div>
         <div className="my-10  flex flex-col items-center">
           <div className="text-center space-y-5 w-full text-black rounded-md p-3 text-xl font-bold">
-            <p>The Accepted Papers, kindly register here </p>
+            <p>Those who got acceptance, kindly register here</p>
             <p>👇</p>
             <Button
               onClick={() => signIn("google")}

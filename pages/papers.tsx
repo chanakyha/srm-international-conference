@@ -3,7 +3,7 @@ import LandingPageLayout from "@/layout/LandingPageLayout";
 const Paper = () => {
   return (
     <div>
-      <LandingPageLayout>
+      <LandingPageLayout> 
         <Cop/>
       </LandingPageLayout>
     </div>

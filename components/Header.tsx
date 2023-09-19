@@ -53,7 +53,7 @@ function Header() {
     <header className="font-montserrat sticky z-50 top-0 border-b bg-white">
       <div className="p-4 md:px-16 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center justify-center">
-          <span className="uppercase font-black text-2xl">ICACST-23</span>
+          <span className="uppercase font-black text-2xl">ICACST&apos;23</span>
         </Link>
         <nav className="lg:flex font-semibold hidden">
           <ul className="mx-auto lg:flex items-center text-slate-300">

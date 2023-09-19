@@ -12,6 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import Image from "next/image";
 
 function Header() {
   const router = useRouter();
@@ -57,8 +58,15 @@ function Header() {
     <header className="font-montserrat sticky z-50 top-0 border-b bg-white">
       <div className="p-4 md:px-16 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center justify-center">
-          <span className="uppercase font-black text-2xl">ICACST &apos;23</span>
-        </Link>
+           <Image
+                                        src={"/assets/icacst23.png"}
+                                        alt="SRMIST Logo"
+                                        width={10000}
+                                        height={10000}
+                                        className=" h-auto w-48 md:ml-[12px] lg:mb-0"
+                                    />
+                            
+                                </Link>
         <nav className="lg:flex font-semibold hidden">
           <ul className="mx-auto lg:flex items-center text-slate-300">
             {NAVLINKS.map(({ title, link }, idx) => (
@@ -96,23 +104,7 @@ function Header() {
                       ))}
                     </ul>
                   </nav>
-                  <div>
-                    {session ? (
-                      <Button
-                        className="w-full"
-                        onClick={() => router.push("/dashboard")}
-                      >
-                        <span className="text-mont">Dashboard</span>
-                      </Button>
-                    ) : (
-                      <Button
-                        className="w-full"
-                        onClick={() => signIn("google")}
-                      >
-                        <span className="text-mont">Register</span>
-                      </Button>
-                    )}
-                  </div>
+            
                 </SheetDescription>
               </SheetHeader>
             </SheetContent>
@@ -120,21 +112,7 @@ function Header() {
         </div>
 
         <div>
-          {session ? (
-            <Button
-              className="font-bold px-8 py-2 lg:flex flex-row hidden"
-              onClick={() => router.push("/dashboard")}
-            >
-              <span className="text-mont">Dashboard</span>
-            </Button>
-          ) : (
-            <Button
-              className="font-bold px-8 py-2 lg:flex flex-row hidden"
-              onClick={() => signIn("google")}
-            >
-              <span className="text-mont">Register</span>
-            </Button>
-          )}
+          
         </div>
       </div>
     </header>

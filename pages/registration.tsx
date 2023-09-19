@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import LandingPageLayout from "@/layout/LandingPageLayout";
+import { signIn } from "next-auth/react";
 import React from "react";
 
 const Registration = () => {
@@ -20,7 +22,9 @@ const Registration = () => {
   return (
     <LandingPageLayout>
       <div className="p-4 md:px-16 lg:max-w-6xl lg:mx-auto min-h-[calc(100vh-400px)]">
-        <h1 className="text-xl font-bold text-center my-10 uppercase">Registration</h1>
+        <h1 className="text-xl font-bold text-center my-10 uppercase">
+          Registration
+        </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {registeration.map((item, idx) => (
             // <div key={idx} className="p-4 bg-slate-50 shadow">
@@ -33,11 +37,22 @@ const Registration = () => {
                   <p className="text-base lg:text-xl font-medium lg:w-44">
                     {item.title}
                   </p>
-                  <h1 className="text-xl lg:text-2xl font-bold">{item.price}</h1>
+                  <h1 className="text-xl lg:text-2xl font-bold">
+                    {item.price}
+                  </h1>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+        <div className="my-10 space-y-5">
+          <h1 className="text-center text-white bg-red-800/60 rounded-md animate-pulse p-3 text-xl font-bold">
+            The Application which is accepted, can register here
+          </h1>
+
+          <Button onClick={() => signIn("google")} className="w-full">
+            Register Here
+          </Button>
         </div>
       </div>
     </LandingPageLayout>

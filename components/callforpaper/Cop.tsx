@@ -130,7 +130,7 @@ function CallForPaper() {
             <Accordion key={index} type="single" collapsible>
               <AccordionItem value={accordion.id}>
                 <AccordionTrigger>
-                  Track 0{index + 1}: {accordion.question}
+                  <p className="text-lg">Track 0{index + 1}: {accordion.question}</p>
                 </AccordionTrigger>
                 <AccordionContent className="w-full">
                   <ul>

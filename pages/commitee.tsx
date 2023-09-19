@@ -80,49 +80,45 @@ const nationalCommitteeMembers = [
 
 export const Committee = () => {
     return (
-        <LandingPageLayout>
-            <div className="w-11/12 md:w-[80%] lg:py-16 mx-auto max-w-7xl min-h-[calc(100vh-5rem)]">
-                <div>
-                    <h1 className="text-xl font-bold text-center my-10">
-                        COMMITEE MEMBERS
-                    </h1>
-                </div>
-                <h1 className="my-4 text-lg font-semibold">International Experts</h1>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {committeeMembers.map((member) => (
-                        <div
-                            key={member.id}
-                            className="bg-slate-50 text-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 hover:-translate-y-1"
-                        >
-                            <h3 className="font-bold text-lg">
-                                {member.title}
-                            </h3>
-                            <p>{member.role}</p>
-                            <p className="text-sm leading-snug tracking-wide text-opacity-100">
-                                {member.affiliation}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-                <h1 className="mb-4 mt-12 text-lg font-semibold">National Experts</h1>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {nationalCommitteeMembers.map((member) => (
-                        <div
-                            key={member.id}
-                            className="bg-slate-50 text-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 hover:-translate-y-1"
-                        >
-                            <h3 className="font-bold text-lg">
-                                {member.title}
-                            </h3>
-                            <p>{member.role}</p>
-                            <p className="text-sm leading-snug tracking-wide text-opacity-100">
-                                {member.affiliation}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </LandingPageLayout>
+      <LandingPageLayout>
+        <div className="w-11/12 md:w-[80%] lg:py-16 mx-auto max-w-7xl min-h-[calc(100vh-5rem)]">
+          <div>
+            <h1 className="text-xl font-bold text-center my-10">
+              COMMITEE MEMBERS
+            </h1>
+          </div>
+          <h1 className="my-4 text-lg font-semibold">International Experts</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {committeeMembers.map((member) => (
+              <div
+                key={member.id}
+                className="bg-slate-50 text-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 hover:-translate-y-1"
+              >
+                <h3 className="font-bold text-lg uppercase">{member.title}</h3>
+                <p>{member.role}</p>
+                <p className="text-base leading-snug tracking-wide text-opacity-100">
+                  {member.affiliation}
+                </p>
+              </div>
+            ))}
+          </div>
+          <h1 className="mb-4 mt-12 text-lg font-semibold">National Experts</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {nationalCommitteeMembers.map((member) => (
+              <div
+                key={member.id}
+                className="bg-slate-50 text-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 hover:-translate-y-1"
+              >
+                <h3 className="font-bold text-lg uppercase">{member.title}</h3>
+                <p>{member.role}</p>
+                <p className="text-base leading-snug tracking-wide text-opacity-100">
+                  {member.affiliation}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </LandingPageLayout>
     );
 };
 

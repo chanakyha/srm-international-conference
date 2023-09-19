@@ -45,6 +45,10 @@ function Header() {
       link: "/commitee",
     },
     {
+      title: "Registration",
+      link: "/registration",
+    },
+    {
       title: "Contact Us",
       link: "/#contact",
     },
@@ -128,7 +132,7 @@ function Header() {
               className="font-bold px-8 py-2 lg:flex flex-row hidden"
               onClick={() => signIn("google")}
             >
-              <span className="text-mont">Login</span>
+              <span className="text-mont">Register</span>
             </Button>
           )}
         </div>

@@ -129,24 +129,38 @@ const Footer = () => {
                     </div>
                     <div className="w-full p-2 md:p-4">
                         <div className="flex flex-col items-center justify-start md:flex-row md:justify-between">
+                            <p className="text-[12px] text-[#777a85]">
+                                Copyright &copy; {new Date().getFullYear()} SRM
+                                Institute of Science and technology, Ramapuram
+                            </p>
                             <div className="mb-4 flex flex-col items-stretch justify-center text-center md:flex-row">
-                                {/* <Link
-                                    href="/terms-and-conditions"
+                                <Link
+                                    target="_blank"
+                                    href="https://srmrmp.edu.in/terms-conditions/"
                                     className="py-2 text-[14px] text-[#777a85] md:mr-[24px]"
                                 >
                                     Terms and Conditions
                                 </Link>
                                 <Link
-                                    href="/privacy-policy"
+                                    target="_blank"
+                                    href="https://srmrmp.edu.in/privacy-policy-2-2/"
                                     className="py-2 text-[14px] text-[#777a85] md:mr-[24px]"
                                 >
                                     Privacy Policy
-                                </Link> */}
+                                </Link>
                             </div>
-                            <p className="mb-4 text-[12px] text-[#777a85] text-center lg:text-right">
-                                Copyright &copy; {new Date().getFullYear()} SRM
-                                Institute of Science and technology, Ramapuram
-                            </p>
+                        </div>
+                        <div className="w-full text-center">
+                            <span className="text-xs text-slate-500">
+                                Designed and Developed by{" "}
+                                <Link
+                                    target="_blank"
+                                    className="hover:underline hover:text-blue-500"
+                                    href={"https://linktr.ee/tech_takaliss"}
+                                >
+                                    Students of SRMRMP
+                                </Link>
+                            </span>
                         </div>
                     </div>
                 </div>

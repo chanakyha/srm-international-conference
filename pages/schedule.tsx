@@ -4,33 +4,40 @@ import React from 'react'
 interface ScheduleProps {
   key: any,
   title: string,
-  desc: string,
+  // desc: string,
   pos: string,
 }[];
 
 const SCHEDULE: ScheduleProps[] = [
   {
-    key: "08:00 AM",
-    title: "Lorem Ipsum",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    key: "20th Oct",
+    title: "Paper Submission",
     pos: "right-timeline",
+    // desc: ""
   },
   {
-    key: 2,
-    title: "Lorem Ipsum",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    key: "27th Oct",
+    title: "Notification of Acceptance",
     pos: "left-timeline",
   },
   {
-    key: 3,
-    title: "Lorem Ipsum",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    key: "4th Nov",
+    title: "Camera Ready Copy Submission",
     pos: "right-timeline",
   },
   {
-    key: 4,
-    title: "Lorem Ipsum",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    key: "7th Nov",
+    title: "Paper Registration",
+    pos: "left-timeline",
+  },
+  {
+    key: "7th Dec",
+    title: "Pre-conference Tutorial",
+    pos: "right-timeline",
+  },
+  {
+    key: "8th Dec",
+    title: "Conference Dates",
     pos: "left-timeline",
   },
   
@@ -57,12 +64,9 @@ function Schedule() {
                           </h1>
                       </div>
                       <div className="order-1 bg-stone-100 text-gray-800 rounded-lg shadow-md w-5/12 px-6 py-4 transition-all duration-300 hover:-translate-y-1">
-                          <h3 className="mb-3 font-bold  text-lg">
+                          <h3 className="font-bold  text-lg">
                               {card.title}
                           </h3>
-                          <p className="text-sm leading-snug tracking-wide  text-opacity-100">
-                              {card.desc}
-                          </p>
                       </div>
                   </div>
               ))}
@@ -78,9 +82,9 @@ function Schedule() {
                           <h3 className="text-lg font-semibold text-gray-900 ">
                               {card.title}
                           </h3>
-                          <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                          {/* <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                               {card.desc}
-                          </p>
+                          </p> */}
                       </li>
                   ))}
               </ol>

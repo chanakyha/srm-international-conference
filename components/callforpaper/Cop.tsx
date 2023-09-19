@@ -110,6 +110,7 @@ const instructionsData = [
   "Authors should mention computing requirements (Hardware & Software) as well as performance issues.",
   "Authors should mention the type of paper (Research/Review/Case Study/Short Communication) on the first page of the manuscript.",
   "Submissions that do not follow the above instructions may be returned to the authors for correction before being published.",
+  
 ];
 
 function CallForPaper() {
@@ -130,7 +131,9 @@ function CallForPaper() {
             <Accordion key={index} type="single" collapsible>
               <AccordionItem value={accordion.id}>
                 <AccordionTrigger>
-                  <p className="text-lg">Track 0{index + 1}: {accordion.question}</p>
+                  <p className="text-lg">
+                    Track 0{index + 1}: {accordion.question}
+                  </p>
                 </AccordionTrigger>
                 <AccordionContent className="w-full">
                   <ul>
@@ -171,6 +174,15 @@ function CallForPaper() {
                   {data}
                 </li>
               ))}
+              <li className="text-gray-500 text-base">
+                Upload your Papers to{" "}
+                <Link
+                  href={"mailto:rmpicacst@srmist.edu.in"}
+                  className="hover:underline text-black font-medium hover:text-blue-500 cursor-pointer"
+                >
+                  rmpicacst@srmist.edu.in
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

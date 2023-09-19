@@ -110,10 +110,6 @@ function Header() {
             </SheetContent>
           </Sheet>
         </div>
-
-        <div>
-          
-        </div>
       </div>
     </header>
   );

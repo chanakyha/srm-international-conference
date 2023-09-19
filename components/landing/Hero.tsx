@@ -30,12 +30,12 @@ function Hero() {
             Technologies
           </p>
         </div>
-        {/* <Button
+        <Button
           asChild
           className="bg-black md:mx-auto md:w-fit text-white rounded-md font-bold px-8 py-2 "
         >
-          <Link href="/schedule">View Schedule</Link>
-        </Button> */}
+          <Link href="/schedule">View Brouchure</Link>
+        </Button>
       </div>
     </section>
   );

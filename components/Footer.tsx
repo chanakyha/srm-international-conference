@@ -30,8 +30,8 @@ const Footer = () => {
                                     <Image
                                         src={"/assets/srmlogo.webp"}
                                         alt="SRMIST Logo"
-                                        width={100}
-                                        height={100}
+                                        width={1000}
+                                        height={1000}
                                         className=" h-auto w-56 md:ml-[12px] lg:mb-0"
                                     />
                                     <h1 className=" text-2xl tracking-widest font-bold lg:mb-0">

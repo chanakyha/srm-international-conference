@@ -67,12 +67,12 @@ function Header() {
                                     />
                             
                                 </Link>
-        <nav className="lg:flex font-semibold hidden">
-          <ul className="mx-auto lg:flex items-center text-slate-300">
+        <nav className="lg:flex w-full font-semibold hidden">
+          <ul className="mx-auto lg:flex pl-10 justify-between w-full text-slate-300">
             {NAVLINKS.map(({ title, link }, idx) => (
               <li
                 key={idx}
-                className="p-5 active text-black hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-emerald-400 hover:to-cyan-400"
+                className="p-5 uppercase active text-black hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-emerald-400 hover:to-cyan-400"
               >
                 <Link href={link}>
                   <span>{title}</span>

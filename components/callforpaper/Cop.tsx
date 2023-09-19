@@ -118,7 +118,7 @@ function CallForPaper() {
     <section>
       <div className="p-4 md:px-16 lg:mx-auto lg:max-w-7xl min-h-[calc(100vh-5rem)]">
         <h1 className="text-xl lg:text-4xl font-bold text-center my-10">
-          Call for Paper
+          Call for Papers
         </h1>
         <p className="text-gray-500 text-base md:px-16 text-center">
           All submitted articles should report novel and unpublished research

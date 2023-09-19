@@ -45,14 +45,17 @@ const Registration = () => {
             </div>
           ))}
         </div>
-        <div className="my-10 space-y-5">
-          <h1 className="text-center text-white bg-red-800/60 rounded-md animate-pulse p-3 text-xl font-bold">
-            The Application which is accepted, can register here
-          </h1>
-
-          <Button onClick={() => signIn("google")} className="w-full">
-            Register Here
-          </Button>
+        <div className="my-10  flex flex-col items-center">
+          <div className="text-center space-y-5 w-full text-black rounded-md p-3 text-xl font-bold">
+            <p>The Accepted Papers, kindly register here </p>
+            <p>👇</p>
+            <Button
+              onClick={() => signIn("google")}
+              className="uppercase tracking-wider"
+            >
+              Register
+            </Button>
+          </div>
         </div>
       </div>
     </LandingPageLayout>

@@ -58,15 +58,14 @@ function Header() {
     <header className="font-montserrat sticky z-50 top-0 border-b bg-white">
       <div className="p-4 md:px-16 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center justify-center">
-           <Image
-                                        src={"/assets/icacst23-1.png"}
-                                        alt="SRMIST Logo"
-                                        width={10000}
-                                        height={10000}
-                                        className=" h-auto w-48 md:ml-[12px] lg:mb-0"
-                                    />
-                            
-                                </Link>
+          <Image
+            src={"/assets/icacst23-1.png"}
+            alt="SRMIST Logo"
+            width={10000}
+            height={10000}
+            className=" h-auto w-48 md:ml-[12px] lg:mb-0"
+          />
+        </Link>
         <nav className="lg:flex w-full font-semibold hidden">
           <ul className="mx-auto lg:flex pl-10 justify-between w-full text-slate-300">
             {NAVLINKS.map(({ title, link }, idx) => (
@@ -104,7 +103,6 @@ function Header() {
                       ))}
                     </ul>
                   </nav>
-            
                 </SheetDescription>
               </SheetHeader>
             </SheetContent>

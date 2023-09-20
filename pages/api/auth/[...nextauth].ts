@@ -16,7 +16,7 @@ export const authOptions: NextAuthOptions = {
       if (currentUser?.data()?.registered) {
         return true;
       }else{
-        await setDoc(docRef, { ...profile, registered: false },{merge:true});
+        await setDoc(docRef, { ...profile, registered: false , paperUpload: false, paperId: ''},{merge:true});
       }
       return true;
     },

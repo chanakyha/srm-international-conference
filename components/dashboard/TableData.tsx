@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Table,
   TableBody,
@@ -10,10 +10,22 @@ import {
 } from "@/components/ui/table";
 import { Label } from "@/components/ui/label";
 import { Button } from '../ui/button';
+import { getSession, useSession } from 'next-auth/react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/backend/firebase';
+import AddPaperDialog from './AddPaperDialog';
 
-const TableData = () => {
+
+
+
+const TableData = ({user,paper}:any) => {
+
+  console.log(user)
+
   return (
-    <div className=''>
+    <div suppressHydrationWarning className=''>
+      {
+        user?.paperUpload ? (
       <Table>
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>
@@ -37,13 +49,12 @@ const TableData = () => {
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell className="font-medium text-center">INV001</TableCell>
+            <TableCell className="font-medium text-center">{paper?.id}</TableCell>
             <TableCell>
-              Enhancing students’ learning process through interactive digital
-              media: New opportunities for collaborative learning
+              {paper?.data?.title}
             </TableCell>
-            <TableCell className="text-center">Credit Card</TableCell>
-            <TableCell className="text-center">23 Sep 2023</TableCell>
+            <TableCell className="text-center">{paper?.data?.track}</TableCell>
+            <TableCell className="text-center">{(paper?.data?.createdAt)?.toDate()?.toLocaleDateString()}</TableCell>
             <TableCell className="text-center">
               {true ? (
                 <Label className="font-bold text-xs">
@@ -58,8 +69,18 @@ const TableData = () => {
           </TableRow>
         </TableBody>
       </Table>
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-2">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              You have not submitted any paper yet. Upload your paper now!
+            </p>
+            <AddPaperDialog/>
+          </div>
+        )
+      }
     </div>
   );
 }
+
 
 export default TableData

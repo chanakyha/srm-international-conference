@@ -27,11 +27,53 @@ import {
 } from "firebase/firestore";
 import { db, storage } from "@/backend/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { useSession } from "next-auth/react";
+import { Progress } from "../ui/progress";
+
+interface TrackProps {
+  title: string;
+  value: string;
+}
+[];
+
+const TRACKLIST: TrackProps[] = [
+  {
+    title: "Intelligent Information Systems",
+    value: "Intelligent Information Systems",
+  },
+  {
+    title: "Bio - Engineering",
+    value: "Bio - Engineering",
+  },
+  {
+    title: "Blockchain Technology",
+    value: "Blockchain Technology",
+  },
+  {
+    title: "Ubiquitous Computing & Communications",
+    value: "Ubiquitous Computing & Communications",
+  },
+  {
+    title: "Smart Network Science",
+    value: "Smart Network Science",
+  },
+  {
+    title: "Computatinal Vision",
+    value: "Computatinal Vision",
+  },
+  {
+    title: "Computing Models and Applications",
+    value: "Computing Models and Applications",
+  },
+];
 
 const AddPaperDialog = () => {
+  const { data: session } = useSession();
   const [track, setTrack] = useState<string>("");
   const [fileName, setFileName] = useState<string>("");
-  const [fileUrl, setFileUrl] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const changeHandler = (e: any) => {
     if (e.target.files.length > 0) {
@@ -50,6 +92,7 @@ const AddPaperDialog = () => {
   };
 
   const addNewPaper = async (e: any) => {
+    setLoading(true);
     e.preventDefault();
     console.log(e.target[0]?.files);
     const paper: any = e.target[0]?.files[0];
@@ -61,39 +104,63 @@ const AddPaperDialog = () => {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done`);
+        // console.log(`Upload is ${progress}% done`);
+        setProgress(progress);
       },
       (error) => {
         console.log(error);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-          setFileUrl(downloadURL);
+          var newPaper = {
+            title: e.target[1].value.trim(),
+            abstract: e.target[2].value.trim(),
+            keywords: e.target[3].value.trim(),
+            track: track,
+            status: "review",
+            paid: false,
+            createdAt: serverTimestamp(),
+            fileUrl: downloadURL,
+          };
+          if (
+            !newPaper.title ||
+            !newPaper.abstract ||
+            !newPaper.keywords ||
+            !newPaper.track
+          ) {
+            setLoading(false);
+            alert("Please fill all the fields");
+          } else {
+            const submissionId = await getSubmissionId();
+            const docRef = doc(db, "papers", submissionId);
+            await setDoc(docRef, { ...newPaper }, { merge: true })
+              .then(() => {
+                const docRef = doc(db, "users", session?.user?.email!);
+                setDoc(
+                  docRef,
+                  { paperUpload: true, paperId: submissionId },
+                  { merge: true }
+                );
+              })
+              .catch((error) => {
+                console.error("Error writing document: ", error);
+                setOpen(false);
+                setLoading(false);
+              });
+            console.log(newPaper);
+            setOpen(false);
+            setLoading(false);
+            alert("Paper Added");
+          }
         });
       }
     );
-    var newPaper = {
-      title: e.target[1].value.trim(),
-      abstract: e.target[2].value.trim(),
-      keywords: e.target[3].value.trim(),
-      track: track,
-      status: "review",
-      paid: false,
-      createdAtDate: new Date(),
-      createdAt: serverTimestamp(),
-      fileUrl: fileUrl,
-    };
-    const submissionId = await getSubmissionId();
-    const docRef = doc(db, "papers", submissionId);
-    await setDoc(docRef, { ...newPaper }, { merge: true });
-    console.log(newPaper);
-    alert("Paper Added");
   };
   return (
-    <div>
-      <Dialog>
+    <div suppressHydrationWarning>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger>
-          <Button className="font-semibold" variant={"outline"}>
+          <Button className="font-semibold" variant={"default"}>
             Upload Paper
           </Button>
         </DialogTrigger>
@@ -108,7 +175,7 @@ const AddPaperDialog = () => {
                       <Label htmlFor="message">Upload File</Label>
                       <label
                         htmlFor="dropzone-file"
-                        className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                        className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                       >
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                           {fileName ? (
@@ -136,10 +203,9 @@ const AddPaperDialog = () => {
                                 <span className="font-semibold">
                                   Click to upload
                                 </span>{" "}
-                                or drag and drop
                               </p>
                               <p className="text-xs text-gray-500 dark:text-gray-400">
-                                SVG, PNG, JPG or GIF (MAX. 800x400px)
+                                PDF (MAX. 15MB)
                               </p>
                             </>
                           )}
@@ -149,24 +215,32 @@ const AddPaperDialog = () => {
                           type="file"
                           onChange={changeHandler}
                           className="hidden"
+                          accept="application/pdf"
                         />
                       </label>
                     </div>
                   </div>
                   <div className="grid w-full items-center gap-1.5">
-                    <Label htmlFor="email">Title</Label>
-                    <Input type="text" id="email" placeholder="Email" />
-                  </div>
-                  <div className="grid w-full gap-1.5">
-                    <Label htmlFor="message">Abstract</Label>
-                    <Textarea
-                      placeholder="Type your message here."
-                      id="message"
+                    <Label htmlFor="title">Title</Label>
+                    <Input
+                      type="text"
+                      id="title"
+                      placeholder="Title of the Paper"
                     />
                   </div>
                   <div className="grid w-full gap-1.5">
-                    <Label htmlFor="message">Keywords</Label>
-                    <Textarea placeholder="Seperate by comma." id="message" />
+                    <Label htmlFor="abstract">Abstract</Label>
+                    <Textarea
+                      placeholder="Abstract of the Paper"
+                      id="abstract"
+                    />
+                  </div>
+                  <div className="grid w-full gap-1.5">
+                    <Label htmlFor="keyword">Keywords</Label>
+                    <Textarea
+                      placeholder="Keywords (seperated by comma)"
+                      id="keyword"
+                    />
                   </div>
                   <div>
                     <Label>Track</Label>
@@ -175,19 +249,22 @@ const AddPaperDialog = () => {
                         <SelectValue placeholder="Select Track" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="light">Light</SelectItem>
-                        <SelectItem value="dark">Dark</SelectItem>
-                        <SelectItem value="system">System</SelectItem>
+                        {TRACKLIST.map((track, idx) => (
+                          <SelectItem key={idx} value={track.value}>
+                            {track.title}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
-                  <div>
-                    <DialogTrigger>
-                      <Button type="submit" className="w-full">
-                        Submit
-                      </Button>
-                    </DialogTrigger>
-                  </div>
+                  {/* <DialogTrigger asChild> */}
+                  <Button type="submit" className="w-full">
+                    {loading ? "Uploading..." : "Upload"}
+                  </Button>
+                  {progress > 0 && (
+                    <Progress value={progress} className="w-full" />
+                  )}
+                  {/* </DialogTrigger> */}
                 </section>
               </form>
             </DialogDescription>

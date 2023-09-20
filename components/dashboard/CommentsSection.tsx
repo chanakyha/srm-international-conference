@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 const CommentsSection = () => {
   return (
     <section className="w-full gap-1.5">
-        <div className="antialiased mx-auto max-w-5xl ">
+        <div className="antialiased mx-auto max-w-7xl ">
           <h3 className="mb-4 text-lg font-semibold text-gray-900">Comments</h3>
           <div className="space-y-4">
             <div className="flex justify-start">

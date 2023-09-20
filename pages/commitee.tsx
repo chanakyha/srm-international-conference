@@ -51,7 +51,7 @@ const patrons = [
   },
   {
     id: 4,
-    title: "Dr. M. Muralikrishna",
+    title: "Dr. M. Murali Krishna",
     role: "",
     affiliation: "Dean (E&T), SRMIST, Ramapuram",
   },

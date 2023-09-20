@@ -58,7 +58,7 @@ const patrons = [
   {
     id: 5,
     title: "Dr. Balika J Chelliah",
-    role: "Deputy HOD/AIML,",
+    role: "",
     affiliation: "Vice Principal (Admin), SRMIST, Ramapuram",
   },
   {
@@ -131,7 +131,7 @@ const coConvenor = [
     id: 1,
     title: "Dr. Balika J Chelliah",
     role: "Deputy HOD/AIML,",
-    affiliation: "Vice Principal (Admin), SRMIST, Ramapuram",
+    affiliation: "SRMIST, Ramapuram",
   },
 ];
 

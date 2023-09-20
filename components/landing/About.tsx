@@ -24,7 +24,7 @@ function About() {
         </h1>
         <p className="text-sm md:text-base text-slate-500 font-medium text-justify">
           SRM Institute of Science and Technology (formerly known as SRM
-          University) is one of the top ranking university in India with over
+          University) is one of the top ranking universities in India with over
           20,000 students and 1,500 faculty, offering a wide range of
           undergraduate, postgraduate and doctoral programs in Engineering,
           Management, Medicine and Health sciences, Science and Humanities.

@@ -130,7 +130,7 @@ const coConvenor = [
   {
     id: 1,
     title: "Dr. Balika J Chelliah",
-    role: "Deputy HOD/AIML,",
+    role: "Deputy HoD/AIML,",
     affiliation: "SRMIST, Ramapuram",
   },
 ];

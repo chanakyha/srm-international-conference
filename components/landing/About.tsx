@@ -70,12 +70,12 @@ function About() {
             B.Tech - CSE with specialization in Artificial Intelligence and
             Machine Learning
           </p>
+          <p>B.Tech - CSE with Specialization in Big Data Analytics </p>
+          <p>B.Tech - CSE with Specialization in Cyber Security </p>
+          <p>B.Tech - CSE with Specialization in Internet of Things </p>
+          <p>B.Tech - Computer Science and Business Systems</p>
           <p>B.Tech - CSE with Specialization in Cloud Computing</p>
           <p>B.Tech - CSE with Specialization in Gaming Technology</p>
-          <p>B.Tech - CSE with Specialization in Big Data Analytics </p>
-          <p>B.Tech - CSE with Specialization in Internet of Things </p>
-          <p>B.Tech - CSE with Specialization in Cyber Security </p>
-          <p>B.Tech - Computer Science and Business Systems</p>
         </p>
         <h1 className="font-bold tracking-wider self-start text-lg md:text-xl lg:text-2xl mt-10">
           Vision

@@ -1,11 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Icon from "../../assets/icon.png";
-// import LinkedInIcon from "@mui/icons-material/LinkedIn";
-// import TwitterIcon from "@mui/icons-material/Twitter";
-// import InstagramIcon from "@mui/icons-material/Instagram";
-// import GitHubIcon from "@mui/icons-material/GitHub";
-// import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import Link from "next/link";
 import {
   FacebookIcon,
@@ -47,7 +42,7 @@ const Footer = () => {
                   <div className="flex flex-col mt-2">
                     <p className="text-sm font-semibold">For Queries:</p>
 
-                    <p>Dr.M.Ayyadurai /Asst. Prof/CSE</p>
+                    <p>Dr.M.Ayyadurai-Asst. Prof-CSE</p>
                     <Link
                       className="hover:underline"
                       href={"mailto:rmpicacst@srmist.edu.in"}

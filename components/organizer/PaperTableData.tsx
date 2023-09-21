@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,63 +8,130 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import AddReveiwersDialog from "./AddReveiwersDialog";
+import { collection, doc, onSnapshot, query } from "firebase/firestore";
+import { db } from "@/backend/firebase";
+import { Button } from "../ui/button";
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { Input } from "../ui/input";
+import { DataTable } from "./data-table";
+
+interface PaperProps {
+  abstract: string;
+  createdAt: any;
+  id: string;
+  keywords: string;
+  paid: boolean;
+  status: string;
+  title: string;
+  track: string;
+  fileUrl: string;
+  assignReveiwer: string;
+}
+[];
 
 const PaperTableData = () => {
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [papers, setPapers] = useState<PaperProps[]>([]);
+  const data = React.useMemo(() => papers, [papers]);
+  const columns = React.useMemo<ColumnDef<PaperProps>[]>(
+    () => [
+      {
+        id: "submissionId",
+        header: "Submission ID",
+        // accessorKey: (row) => row.id,
+        render: flexRender,
+      },
+      {
+        id: "paperTitle",
+        header: "Paper Title",
+        // accessorKey: (row) => row.title,
+        render: flexRender,
+      },
+      {
+        id: "track",
+        header: "Track",
+        // accessorKey: (row) => row.track,
+        render: flexRender,
+      },
+      {
+        id: "uploadedDate",
+        header: "Uploaded Date",
+        // accessorKey: (row) => row.createdAt.toDate().toLocaleDateString(),
+        render: flexRender,
+      },
+      {
+        id: "assignReveiwer",
+        header: "Assign Reveiwer",
+        // accessorKey: (row) => row.assignReveiwer,
+        render: flexRender,
+      },
+    ],
+    []
+  );
+
+  const table = useReactTable({
+    data,
+    columns,
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      sorting,
+      columnFilters,
+    },
+  });
+
+  useEffect(() => {
+    const colRef = collection(db, "papers");
+    const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
+      const papers: any = [];
+      querySnapshot.forEach((doc) => {
+        papers.push({ ...doc.data(), id: doc.id });
+      });
+      setPapers(papers);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  console.log(papers);
+
   return (
     <div suppressHydrationWarning className="">
-      <div className="flex justify-between my-2 ">
+      <div className="flex justify-between my-4">
         <h1 className="text-lg md:text-2xl font-semibold text-gray-900">
           Assign Reveiwers
         </h1>
         <AddReveiwersDialog />
       </div>
-      <Table>
-        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter emails..."
+          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("email")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+      </div>
+      <DataTable columns={columns} data={data} />
+      {/* <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="font-bold text-center w-[150px]">
@@ -85,18 +152,27 @@ const PaperTableData = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">
-                {invoice.totalAmount}
+          {papers.map((paper) => (
+            <TableRow key={paper.id}>
+              <TableCell width={200} className="font-medium text-center">
+                {paper.id}
+              </TableCell>
+              <TableCell>{paper.title}</TableCell>
+              <TableCell width={300} className="text-center">
+                {paper.track}
+              </TableCell>
+              <TableCell className="text-center">
+                {paper.createdAt.toDate().toLocaleDateString()}
+              </TableCell>
+              <TableCell className="text-center">
+                <Button size={"sm"} variant={"outline"} className="">
+                  Assign
+                </Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </Table> */}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { LogOutIcon } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function Organizer() {
   const { data: session } = useSession();
@@ -53,13 +54,24 @@ function Organizer() {
                 <DashCards />
               </div>
               <div>
-                <PaperTableData />
-              </div>
-              <div>
-                <ReviewerTableData />
-              </div>
-              <div>
-                <PaymentTableData />
+                <Tabs defaultValue="Assign" className="">
+                  <TabsList className="my-4">
+                    <TabsTrigger value="Assign">Assign Reviewers</TabsTrigger>
+                    <TabsTrigger value="Details">
+                      Reviewers Details
+                    </TabsTrigger>
+                    <TabsTrigger value="Payment">Payment Details</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="Assign">
+                    <PaperTableData />
+                  </TabsContent>
+                  <TabsContent value="Details">
+                    <ReviewerTableData />
+                  </TabsContent>
+                  <TabsContent value="Payment">
+                    <PaymentTableData />
+                  </TabsContent>
+                </Tabs>
               </div>
             </div>
           </header>

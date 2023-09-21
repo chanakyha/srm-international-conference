@@ -1,7 +1,6 @@
 // pages/dashboard.tsx
 
 import { db } from "@/backend/firebase";
-import AddPaperDialog from "@/components/organizer/AddPaperDialog";
 import { Button } from "@/components/ui/button";
 import LandingPageLayout from "@/layout/LandingPageLayout";
 import {
@@ -16,9 +15,7 @@ import {
 import { getSession, signOut } from "next-auth/react";
 import Image from "next/image";
 
-import AddAuthorsDialog from "@/components/organizer/AddAuthorsDialog";
 import TableData from "@/components/organizer/PaperTableData";
-import CommentsSection from "@/components/organizer/CommentsSection";
 import { LogOutIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -95,12 +92,12 @@ function Dashboard({ user }: DashboardProps) {
                 </p> */}
               </div>
               <div className="flex gap-2">
-                {user?.paperUpload && <AddAuthorsDialog />}
+                {/* {user?.paperUpload && <AddAuthorsDialog />} */}
               </div>
               <div>
-                <TableData user={user} paper={paper} />
+                {/* <TableData user={user} paper={paper} /> */}
               </div>
-              <div>{user?.paperUpload && <CommentsSection />}</div>
+              {/* <div>{user?.paperUpload && <CommentsSection />}</div> */}
             </div>
           </header>
         </section>

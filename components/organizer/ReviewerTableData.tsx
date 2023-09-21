@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -7,7 +7,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "@/backend/firebase";
 
+interface ReviewerProps {
+  reviewerEmail: string;
+  reviewerName: string;
+  reviewerOrg: string;
+  picture: string;
+  assignedPapers: string[];
+}
+[];
 const invoices = [
   {
     invoice: "INV001",
@@ -54,6 +64,20 @@ const invoices = [
 ];
 
 const ReviewerTableData = () => {
+  const [reviewers, setReviewers] = useState<ReviewerProps[]>([]);
+  useEffect(() => {
+    const colRef = collection(db, "reviewers");
+    const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
+      const reviewer: any = [];
+      querySnapshot.forEach((doc) => {
+        reviewer.push({ ...doc.data(), id: doc.id });
+      });
+      setReviewers(reviewer);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  console.log(reviewers);
   return (
     <div suppressHydrationWarning className="">
       <div className="">
@@ -65,31 +89,28 @@ const ReviewerTableData = () => {
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>
           <TableRow>
-            <TableHead className="font-bold text-center w-[150px]">
+            <TableHead className="font-bold text-left w-[250px]">
               Reveiwer Name
             </TableHead>
-            <TableHead className="font-bold text-left w-[200px]">
+            <TableHead className="font-bold text-left w-[250px]">
               Email
+            </TableHead>
+            <TableHead className="font-bold text-center w-[250px]">
+              Organization
             </TableHead>
             <TableHead className="font-bold text-center w-[250px]">
               Assigned Papers
             </TableHead>
-            <TableHead className="font-bold text-center w-[250px]">
-              Reviewed Papers
-            </TableHead>
-            <TableHead className="font-bold text-center w-[250px]">
-              Accepted Papers
-            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">
-                {invoice.totalAmount}
+          {reviewers.map((reviewer) => (
+            <TableRow key={reviewer.reviewerEmail}>
+              <TableCell className="">{reviewer.reviewerName}</TableCell>
+              <TableCell>{reviewer.reviewerEmail}</TableCell>
+              <TableCell className="text-center">{reviewer.reviewerOrg}</TableCell>
+              <TableCell className="text-center">
+                {reviewer.assignedPapers.length}
               </TableCell>
             </TableRow>
           ))}

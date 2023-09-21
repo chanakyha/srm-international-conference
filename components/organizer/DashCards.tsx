@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { collection, getCountFromServer } from 'firebase/firestore';
+import { db } from '@/backend/firebase';
+
+interface CountProps {
+  userCount: number,
+  paperCount: number,
+  reviewerCount: number
+};
 
 const DashCards = () => {
+
+  const [count, setCount] = useState({} as CountProps);
+
+  const getUserCount = async () => {
+    const userCol = collection(db, "users");
+    const paperCol = collection(db, "papers");
+    const reviewersCol = collection(db, "reviewers");
+    const snapshotUser = await getCountFromServer(userCol);
+    const snapshotPaper = await getCountFromServer(paperCol);
+    const snapshot = await getCountFromServer(reviewersCol);
+    setCount({userCount:snapshotUser.data().count, paperCount:snapshotPaper.data().count, reviewerCount:snapshot.data().count});
+  }
+
+  useEffect(() => {
+    getUserCount();
+  },[])
+
   return (
     <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
       <Card>
@@ -23,7 +48,7 @@ const DashCards = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">4000</div>
+          <div className="text-2xl font-bold">{count?.userCount}</div>
           <p className="text-xs text-muted-foreground">Total No of Users</p>
         </CardContent>
       </Card>
@@ -46,7 +71,7 @@ const DashCards = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">3258</div>
+          <div className="text-2xl font-bold">{count?.paperCount}</div>
           <p className="text-xs text-muted-foreground">
             Total No of Papers Uploaded
           </p>
@@ -71,7 +96,7 @@ const DashCards = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">120</div>
+          <div className="text-2xl font-bold">{count?.reviewerCount}</div>
           <p className="text-xs text-muted-foreground">Total No of Reveiwers</p>
         </CardContent>
       </Card>

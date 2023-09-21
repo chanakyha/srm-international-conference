@@ -10,18 +10,27 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.JWT_SECRET!,
   callbacks: {
     async signIn({ profile }) {
-      const docRef = doc(db, "users", profile?.email!);
-      const currentUser = await getDoc(docRef)
-      console.log(currentUser.data());
-      if (currentUser?.data()?.registered) {
+      
+      if (profile?.email==='srmtexus2k23@gmail.com'){
         return true;
-      }else{
-        await setDoc(docRef, { ...profile, registered: false , paperUpload: false, paperId: ''},{merge:true});
       }
-      return true;
+      else if(profile?.email?.endsWith('@srmist.edu.in')) {
+        const docRef = doc(db, "reviewers", profile?.email!);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          await setDoc(docRef, { ...profile }, { merge: true });
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+      else {
+        return false;
+      }
     },
     async redirect({ baseUrl }) {
-      return baseUrl + "/dashboard"; // Redirect to the /dashboard page
+      return baseUrl + "/dashboard"; 
     },
   },
   providers: [

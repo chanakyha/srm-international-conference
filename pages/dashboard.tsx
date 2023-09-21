@@ -120,10 +120,10 @@ export async function getServerSideProps(context: any) {
   const docRef = doc(db, "users", email!);
   const docSnap = await getDoc(docRef);
 
-  if (!docSnap.data()?.registered) {
+  if (session?.user?.email==='srmtexus2k23@gmail.com') {
     return {
       redirect: {
-        destination: "/register",
+        destination: "/organizer",
         permanent: false,
       },
     };

@@ -56,7 +56,7 @@ function Header() {
   ];
   return (
     <header className="font-montserrat sticky z-50 top-0 border-b bg-white">
-      <div className="p-4 md:px-16 flex items-center justify-between h-20">
+      <div className="p-2 md:px-16 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center justify-center">
           <Image
             src={"/assets/icacst23-1.png"}
@@ -66,47 +66,8 @@ function Header() {
             className=" h-auto w-48 md:ml-[12px] lg:mb-0"
           />
         </Link>
-        <nav className="lg:flex w-full font-semibold hidden">
-          <ul className="mx-auto lg:flex pl-10 justify-between w-full text-slate-300">
-            {NAVLINKS.map(({ title, link }, idx) => (
-              <li
-                key={idx}
-                className="p-5 uppercase active text-black hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-emerald-400 hover:to-cyan-400"
-              >
-                <Link href={link}>
-                  <span>{title}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <div className="lg:hidden block ml-auto">
-          <Sheet>
-            <SheetTrigger>
-              <Menu strokeWidth={1.5} size={24} />
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>ICACST-23</SheetTitle>
-                <SheetDescription>
-                  <nav className="contents font-semibold ">
-                    <ul className="mx-auto flex flex-col items-center text-slate-300">
-                      {NAVLINKS.map(({ title, link }, idx) => (
-                        <li
-                          key={idx}
-                          className="p-2 active text-black hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-emerald-400 hover:to-cyan-400"
-                        >
-                          <Link href={link}>
-                            <span>{title}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                </SheetDescription>
-              </SheetHeader>
-            </SheetContent>
-          </Sheet>
+        <div>
+          <span className="lg:text-base text-sm font-semibold">Administrator Website</span>
         </div>
       </div>
     </header>

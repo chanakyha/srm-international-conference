@@ -34,7 +34,9 @@ function Hero() {
           asChild
           className="bg-black md:mx-auto md:w-fit text-white rounded-md font-bold px-8 py-2 "
         >
-          <Link href="/schedule">View Brouchure</Link>
+          <Link target="_blank" href="/assets/ICACST Brouchure CMYK 211121.pdf">
+            View Brouchure
+          </Link>
         </Button>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Dialog,
   DialogContent,
@@ -10,27 +10,19 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
-const AddAuthorsDialog = () => {
+const AddReveiwersDialog = () => {
   return (
     <div>
       <Dialog>
         <DialogTrigger>
           <Button className="font-semibold" variant={"outline"}>
-            Add Authors
+            Add Reveiwer
           </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Add Authors</DialogTitle>
+            <DialogTitle>Add Reveiwer</DialogTitle>
             <DialogDescription>
               <section className="mt-4 flex flex-col gap-4">
                 <div className="grid w-full items-center gap-1.5">
@@ -47,6 +39,6 @@ const AddAuthorsDialog = () => {
       </Dialog>
     </div>
   );
-};
+}
 
-export default AddAuthorsDialog;
+export default AddReveiwersDialog

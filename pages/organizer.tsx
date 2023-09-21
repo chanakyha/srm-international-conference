@@ -1,14 +1,13 @@
-import AddAuthorsDialog from "@/components/dashboard/AddAuthorsDialog";
-import AddReveiwersDialog from "@/components/dashboard/AddReveiwersDialog";
-import DashCards from "@/components/dashboard/DashCards";
+import DashCards from "@/components/organizer/DashCards";
+import PaperTableData from "@/components/organizer/PaperTableData";
+import PaymentTableData from "@/components/organizer/PaymentTableData";
+import ReviewerTableData from "@/components/organizer/ReviewerTableData";
 import { Button } from "@/components/ui/button";
 import LandingPageLayout from "@/layout/LandingPageLayout";
 import { LogOutIcon } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
-
-
 
 function Organizer() {
   const { data: session } = useSession();
@@ -50,13 +49,18 @@ function Organizer() {
                   Organizer Dashboard
                 </h1>
               </div>
-              <div className="flex gap-2">
-                <AddReveiwersDialog />
+              <div>
+                <DashCards />
               </div>
               <div>
-                <DashCards/>
+                <PaperTableData />
               </div>
-              {/* <div>{user?.paperUpload && <CommentsSection />}</div> */}
+              <div>
+                <ReviewerTableData />
+              </div>
+              <div>
+                <PaymentTableData />
+              </div>
             </div>
           </header>
         </section>

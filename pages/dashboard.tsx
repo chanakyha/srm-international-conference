@@ -1,16 +1,24 @@
 // pages/dashboard.tsx
 
 import { db } from "@/backend/firebase";
-import AddPaperDialog from "@/components/dashboard/AddPaperDialog";
+import AddPaperDialog from "@/components/organizer/AddPaperDialog";
 import { Button } from "@/components/ui/button";
 import LandingPageLayout from "@/layout/LandingPageLayout";
-import { Timestamp, collection, doc, getDoc, getDocs, onSnapshot, query } from "firebase/firestore";
+import {
+  Timestamp,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 import { getSession, signOut } from "next-auth/react";
 import Image from "next/image";
 
-import AddAuthorsDialog from "@/components/dashboard/AddAuthorsDialog";
-import TableData from "@/components/dashboard/TableData";
-import CommentsSection from "@/components/dashboard/CommentsSection";
+import AddAuthorsDialog from "@/components/organizer/AddAuthorsDialog";
+import TableData from "@/components/organizer/PaperTableData";
+import CommentsSection from "@/components/organizer/CommentsSection";
 import { LogOutIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -26,29 +34,25 @@ interface User {
   paperId: string;
 }
 
-
 interface DashboardProps {
-  user: User | null,
+  user: User | null;
 }
 
-function Dashboard({user}: DashboardProps) {
-
+function Dashboard({ user }: DashboardProps) {
   const [paper, setPaper] = useState<any>(null);
   console.log(user);
   // console.log(paper);
   // console.log(createdAt)
 
   useEffect(() => {
-    if (user?.paperId){
-
+    if (user?.paperId) {
       const unsub = onSnapshot(doc(db, "papers", user?.paperId), (doc) => {
-        if (doc.exists()){
-          setPaper({data:doc.data(),id:doc.id});
+        if (doc.exists()) {
+          setPaper({ data: doc.data(), id: doc.id });
         }
       });
       return () => unsub();
     }
-    
   }, [user?.paperId]);
   return (
     <LandingPageLayout>
@@ -76,8 +80,8 @@ function Dashboard({user}: DashboardProps) {
                   </div>
                 </div>
                 <div>
-                  <Button  onClick={() => signOut()} variant={"ghost"}>
-                    <LogOutIcon  />
+                  <Button onClick={() => signOut()} variant={"ghost"}>
+                    <LogOutIcon />
                   </Button>
                 </div>
               </div>
@@ -94,7 +98,7 @@ function Dashboard({user}: DashboardProps) {
                 {user?.paperUpload && <AddAuthorsDialog />}
               </div>
               <div>
-                <TableData user={user} paper={paper}  />
+                <TableData user={user} paper={paper} />
               </div>
               <div>{user?.paperUpload && <CommentsSection />}</div>
             </div>
@@ -120,7 +124,7 @@ export async function getServerSideProps(context: any) {
   const docRef = doc(db, "users", email!);
   const docSnap = await getDoc(docRef);
 
-  if (session?.user?.email==='srmtexus2k23@gmail.com') {
+  if (session?.user?.email === "srmtexus2k23@gmail.com") {
     return {
       redirect: {
         destination: "/organizer",
@@ -153,7 +157,7 @@ export async function getServerSideProps(context: any) {
   const user: any = session ? { user: docSnap.data() } : null;
   return {
     props: {
-      ...user
+      ...user,
     },
   };
 }

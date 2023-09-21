@@ -50,7 +50,7 @@ const Registration = () => {
             <p>Those who got acceptance, kindly register here</p>
             <p>👇</p>
             <Button
-              onClick={() => signIn("google")}
+              // onClick={() => signIn("google")}
               className="uppercase tracking-wider"
             >
               Register

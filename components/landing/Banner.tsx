@@ -40,7 +40,7 @@ function Banner() {
             </div>
             <div className="w-full lg:w-1/3 md:flex md:justify-center lg:justify-start">
               <Button
-                onClick={() => signIn("google")}
+                // onClick={() => signIn("google")}
                 className="w-full md:w-fit font-bold"
               >
                 Register Now

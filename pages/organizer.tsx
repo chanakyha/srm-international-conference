@@ -3,12 +3,13 @@ import PaymentTableData from "@/components/organizer/PaymentTableData";
 import ReviewerTableData from "@/components/organizer/ReviewerTableData";
 import { Button } from "@/components/ui/button";
 import LandingPageLayout from "@/layout/LandingPageLayout";
-import { LogOutIcon } from "lucide-react";
+import { LogOutIcon, View } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PapersTable from "@/components/organizer/Papers/PapersTable";
+// import ViewPaperTable from "@/components/organizer/ViewPaperTable";
 
 function Organizer() {
   const { data: session } = useSession();
@@ -60,6 +61,9 @@ function Organizer() {
                     <TabsTrigger value="Details">
                       Reviewers Details
                     </TabsTrigger>
+                    <TabsTrigger value="Papers">
+                      Paper Details
+                    </TabsTrigger>
                     <TabsTrigger value="Payment">Payment Details</TabsTrigger>
                   </TabsList>
                   <TabsContent value="Assign">
@@ -67,6 +71,9 @@ function Organizer() {
                   </TabsContent>
                   <TabsContent value="Details">
                     <ReviewerTableData />
+                  </TabsContent>
+                  <TabsContent value="Papers">
+                    {/* <ViewPaperTable/> */}
                   </TabsContent>
                   <TabsContent value="Payment">
                     <PaymentTableData />

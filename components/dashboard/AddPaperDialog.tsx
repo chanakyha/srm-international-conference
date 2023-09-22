@@ -133,12 +133,22 @@ const AddPaperDialog = () => {
           } else {
             const submissionId = await getSubmissionId();
             const docRef = doc(db, "papers", submissionId);
-            await setDoc(docRef, { ...newPaper }, { merge: true })
+            await setDoc(
+              docRef,
+              {
+                ...newPaper,
+                assignedReviewerName: "",
+                assignedReviewerEmail: "",
+                firstAuthor: session?.user?.email!,
+                comments: [],
+              },
+              { merge: true }
+            )
               .then(() => {
                 const docRef = doc(db, "users", session?.user?.email!);
                 setDoc(
                   docRef,
-                  { paperUpload: true, paperId: submissionId },
+                  { paperUpload: true, paperId: submissionId, firstAuthor: true },
                   { merge: true }
                 );
               })

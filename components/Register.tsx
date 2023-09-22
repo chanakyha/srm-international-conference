@@ -36,7 +36,7 @@ function Register() {
         
 
         const docRef = doc(db, "users", session?.user?.email)
-        await setDoc(docRef, {...newUser, registered: true},{merge:true})
+        await setDoc(docRef, {...newUser, registered: true,firstAuthor:false},{merge:true})
         router.push('/dashboard')
         alert("Registered Successfully")
         

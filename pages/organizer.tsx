@@ -1,5 +1,4 @@
 import DashCards from "@/components/organizer/DashCards";
-import PaperTableData from "@/components/organizer/PaperTableData";
 import PaymentTableData from "@/components/organizer/PaymentTableData";
 import ReviewerTableData from "@/components/organizer/ReviewerTableData";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,7 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import PapersTable from "@/components/organizer/Papers/PapersTable";
 
 function Organizer() {
   const { data: session } = useSession();
@@ -63,7 +63,7 @@ function Organizer() {
                     <TabsTrigger value="Payment">Payment Details</TabsTrigger>
                   </TabsList>
                   <TabsContent value="Assign">
-                    <PaperTableData />
+                    <PapersTable />
                   </TabsContent>
                   <TabsContent value="Details">
                     <ReviewerTableData />

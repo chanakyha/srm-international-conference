@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import AddReveiwersDialog from "./AddReveiwersDialog";
-import { collection, doc, onSnapshot, query } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "@/backend/firebase";
 import { Button } from "../ui/button";
 
@@ -25,6 +25,7 @@ import {
 } from "@tanstack/react-table";
 import { Input } from "../ui/input";
 import { DataTable } from "./data-table";
+import AssignCombo from "./AssignCombo";
 
 interface PaperProps {
   abstract: string;
@@ -99,7 +100,10 @@ const PaperTableData = () => {
   });
 
   useEffect(() => {
-    const colRef = collection(db, "papers");
+    const colRef = query(
+      collection(db, "papers"),
+      where("assignedReviewerName", "==", "")
+    );
     const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
       const papers: any = [];
       querySnapshot.forEach((doc) => {
@@ -120,7 +124,7 @@ const PaperTableData = () => {
         </h1>
         <AddReveiwersDialog />
       </div>
-      <div className="flex items-center py-4">
+      {/* <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -130,8 +134,8 @@ const PaperTableData = () => {
           className="max-w-sm"
         />
       </div>
-      <DataTable columns={columns} data={data} />
-      {/* <Table>
+      <DataTable columns={columns} data={data} /> */}
+      <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="font-bold text-center w-[150px]">
@@ -165,14 +169,15 @@ const PaperTableData = () => {
                 {paper.createdAt.toDate().toLocaleDateString()}
               </TableCell>
               <TableCell className="text-center">
-                <Button size={"sm"} variant={"outline"} className="">
+                {/* <Button size={"sm"} variant={"outline"} className="">
                   Assign
-                </Button>
+                </Button> */}
+                <AssignCombo paper={paper}/>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
-      </Table> */}
+      </Table>
     </div>
   );
 };

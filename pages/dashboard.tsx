@@ -18,6 +18,8 @@ import Image from "next/image";
 import TableData from "@/components/organizer/PaperTableData";
 import { LogOutIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import PaperTableData from "@/components/organizer/PaperTableData";
+import ReviewTableData from "@/components/dashboard/ReviewTableData";
 
 interface User {
   email: string;
@@ -36,21 +38,8 @@ interface DashboardProps {
 }
 
 function Dashboard({ user }: DashboardProps) {
-  const [paper, setPaper] = useState<any>(null);
   console.log(user);
-  // console.log(paper);
-  // console.log(createdAt)
-
-  useEffect(() => {
-    if (user?.paperId) {
-      const unsub = onSnapshot(doc(db, "papers", user?.paperId), (doc) => {
-        if (doc.exists()) {
-          setPaper({ data: doc.data(), id: doc.id });
-        }
-      });
-      return () => unsub();
-    }
-  }, [user?.paperId]);
+  
   return (
     <LandingPageLayout>
       <main
@@ -84,18 +73,11 @@ function Dashboard({ user }: DashboardProps) {
               </div>
               <div className="">
                 <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-                  Dashboard
+                  Reviewer Dashboard
                 </h1>
-                {/* <p className="mt-1.5 text-sm text-gray-500">
-                  Your website has seen a 52% increase in traffic in the last
-                  month. Keep it up! 🚀
-                </p> */}
-              </div>
-              <div className="flex gap-2">
-                {/* {user?.paperUpload && <AddAuthorsDialog />} */}
               </div>
               <div>
-                {/* <TableData user={user} paper={paper} /> */}
+                <ReviewTableData/>
               </div>
               {/* <div>{user?.paperUpload && <CommentsSection />}</div> */}
             </div>
@@ -118,7 +100,7 @@ export async function getServerSideProps(context: any) {
     };
   }
   const email = session?.user?.email;
-  const docRef = doc(db, "users", email!);
+  const docRef = doc(db, "reviewers", email!);
   const docSnap = await getDoc(docRef);
 
   if (session?.user?.email === "srmtexus2k23@gmail.com") {
@@ -129,27 +111,7 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
-  // if (docSnap.data()?.paperUpload) {
-  //   const paperId = docSnap.data()?.paperId;
-  //   const paperRef = doc(db, "papers", paperId);
-  //   const paperSnap = await getDoc(paperRef);
-  //   const paper: any = paperSnap.data();
-  //   return {
-  //   props: {
-  //     paper: {
-  //       ...paper,
-  //       createdAt: (paper.createdAt as Timestamp).toDate().toLocaleString(),
-  //     },
-  //   },
-  // };
-  // }
-  // else{
-  //   return {
-  //     props: {
-  //       paper: null
-  //     }
-  //   }
-  // }
+  
 
   const user: any = session ? { user: docSnap.data() } : null;
   return {

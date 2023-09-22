@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { collection, getCountFromServer } from 'firebase/firestore';
+import { collection, getCountFromServer, onSnapshot } from 'firebase/firestore';
 import { db } from '@/backend/firebase';
 
 interface CountProps {
@@ -11,21 +11,49 @@ interface CountProps {
 
 const DashCards = () => {
 
-  const [count, setCount] = useState({} as CountProps);
+  const [count, setCount] = useState({
+    userCount: 0,
+    paperCount: 0,
+    reviewerCount: 0,
+  } as CountProps);
 
-  const getUserCount = async () => {
+  
+  useEffect(() => {
     const userCol = collection(db, "users");
-    const paperCol = collection(db, "papers");
-    const reviewersCol = collection(db, "reviewers");
-    const snapshotUser = await getCountFromServer(userCol);
-    const snapshotPaper = await getCountFromServer(paperCol);
-    const snapshot = await getCountFromServer(reviewersCol);
-    setCount({userCount:snapshotUser.data().count, paperCount:snapshotPaper.data().count, reviewerCount:snapshot.data().count});
-  }
+    const unsubscribe = onSnapshot(userCol, (querySnapshot) => {
+        querySnapshot.docs.length;
+        setCount((count) => ({
+            ...count,
+            userCount: querySnapshot.docs.length,
+        }));
+    });
+    return () => unsubscribe();
+  },[]);
 
   useEffect(() => {
-    getUserCount();
+    const paperCol = collection(db, "papers");
+    const unsubscribe = onSnapshot(paperCol, (querySnapshot) => {
+        querySnapshot.docs.length;
+        setCount((count) => ({
+            ...count,
+            paperCount: querySnapshot.docs.length,
+        }));
+    });
+    return () => unsubscribe();
+  },[]);
+
+  useEffect(() => {
+    const colRef = collection(db, "reviewers");
+    const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
+        querySnapshot.docs.length;
+        setCount((count) => ({
+            ...count,
+            reviewerCount: querySnapshot.docs.length,
+        }));
+    });
+    return () => unsubscribe();
   },[])
+
 
   return (
     <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-5">

@@ -30,29 +30,24 @@ import { columns } from "./columns";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/backend/firebase";
 
-interface PaperProps {
-    abstract: string;
-    createdAt: any;
-    id: string;
-    keywords: string;
-    paid: boolean;
-    status: string;
-    title: string;
-    track: string;
-    fileUrl: string;
-    assignedReviewerName: string;
+interface ReviewerProps {
+    reviewerEmail: string;
+    reviewerName: string;
+    reviewerOrg: string;
+    picture: string;
+    assignedPapers: string[];
 }
-[];
 
-const PapersTable: React.FC = () => {
-    const [papers, setPapers] = useState<PaperProps[]>([]);
+const ReviewersTable: React.FC = () => {
+
+    const [reviewers, setReviewers] = useState<ReviewerProps[]>([]);
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);
     const [filterValue, setFilterValue] = React.useState("id");
 
     const table = useReactTable({
-        data: papers,
+        data: reviewers,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
@@ -71,33 +66,33 @@ const PapersTable: React.FC = () => {
     }, [table]);
 
     useEffect(() => {
-        const colRef = collection(db, "papers");
+        const colRef = collection(db, "reviewers");
         const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
-            const papers: any = [];
+            const reviewers: any = [];
             querySnapshot.forEach((doc) => {
-                papers.push({ ...doc.data(), id: doc.id });
+                reviewers.push({ ...doc.data(), id: doc.id });
             });
-            setPapers(papers);
+            setReviewers(reviewers);
         });
         return () => unsubscribe();
     }, []);
 
-    // console.log(table.getRowModel().rows.map((row) => row._valuesCache));
-    console.log(papers)
+    // console.log(table.getColumn(filterValue));
 
     return (
         <section className="col-span-9 overflow-y-scroll">
             <div className="flex items-center py-4 px-4">
                 <Select
                     onValueChange={(value) => setFilterValue(value)}
-                    defaultValue="id"
+                    defaultValue="reviewerEmail"
                 >
                     <SelectTrigger className="w-[180px] mr-4">
                         <SelectValue placeholder="Filter by" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="id">Submission ID</SelectItem>
-                        <SelectItem value="track">Track</SelectItem>
+                        <SelectItem value="reviewerEmail">Email</SelectItem>
+                        <SelectItem value="reviewerName">Name</SelectItem>
+                        <SelectItem value="reviewerOrg">Organization</SelectItem>
                     </SelectContent>
                 </Select>
                 <Input
@@ -163,7 +158,7 @@ const PapersTable: React.FC = () => {
                                 {row.getVisibleCells().map((cell) => (
                                     <TableCell
                                         key={cell.id}
-                                        className="text-xs text-center"
+                                        className="text-xs text-left"
                                     >
                                         {flexRender(
                                             cell.column.columnDef.cell,
@@ -189,4 +184,4 @@ const PapersTable: React.FC = () => {
     );
 };
 
-export default PapersTable;
+export default ReviewersTable;

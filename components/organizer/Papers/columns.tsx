@@ -2,6 +2,7 @@ import { Check, X, ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Timestamp } from "firebase/firestore";
+import AssignCombo from "./AssignCombo";
 
 interface PaperProps {
     abstract: string;
@@ -13,8 +14,8 @@ interface PaperProps {
     title: string;
     track: string;
     fileUrl: string;
-    assignReveiwer: string;
-};
+    assignedReviewerName: string;
+}
 
 export const columns: ColumnDef<PaperProps>[] = [
     {
@@ -35,19 +36,22 @@ export const columns: ColumnDef<PaperProps>[] = [
         cell: ({ row }) => {
             return (
                 <div className="text-gray-500">
-                    {(row.getValue("createdAt") as Timestamp).toDate().toLocaleDateString()}
+                    {(row.getValue("createdAt") as Timestamp)
+                        .toDate()
+                        .toLocaleDateString()}
                 </div>
             );
         },
     },
     {
-        accessorKey: "assignReveiwer",
+        accessorKey: "assignedReviewerName",
         header: () => <h1 className="text-center">Assign Reveiwer</h1>,
         cell: ({ row }) => {
             return (
-                <Button size={"sm"} variant={"outline"} className="">
-                    Assign
-                </Button>
+                <AssignCombo
+                    tt={row.getValue("assignedReviewerName")}
+                    id={row.getValue("id")}
+                />
             );
         },
     },

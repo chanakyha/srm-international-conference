@@ -1,6 +1,5 @@
 import DashCards from "@/components/organizer/DashCards";
 import PaymentTableData from "@/components/organizer/PaymentTableData";
-import ReviewerTableData from "@/components/organizer/ReviewerTableData";
 import { Button } from "@/components/ui/button";
 import LandingPageLayout from "@/layout/LandingPageLayout";
 import { LogOutIcon, View } from "lucide-react";
@@ -9,6 +8,8 @@ import Image from "next/image";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PapersTable from "@/components/organizer/Papers/PapersTable";
+import ReviewersTable from "@/components/organizer/Reviewer/ReviewersTable";
+import AddReveiwersDialog from "@/components/organizer/AddReveiwersDialog";
 // import ViewPaperTable from "@/components/organizer/ViewPaperTable";
 
 function Organizer() {
@@ -55,6 +56,7 @@ function Organizer() {
                 <DashCards />
               </div>
               <div>
+                <AddReveiwersDialog/>
                 <Tabs defaultValue="Assign" className="">
                   <TabsList className="my-4">
                     <TabsTrigger value="Assign">Assign Reviewers</TabsTrigger>
@@ -70,7 +72,7 @@ function Organizer() {
                     <PapersTable />
                   </TabsContent>
                   <TabsContent value="Details">
-                    <ReviewerTableData />
+                    <ReviewersTable />
                   </TabsContent>
                   <TabsContent value="Papers">
                     {/* <ViewPaperTable/> */}

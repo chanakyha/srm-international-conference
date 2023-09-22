@@ -4,21 +4,20 @@ import { signIn } from "next-auth/react";
 import React from "react";
 
 const Registration = () => {
-
-    const registeration = [
-      {
-        title: "For Academicians, Students, Research Scholars",
-        price: "₹1000",
-      },
-      {
-        title: "For Industry Participants",
-        price: "₹1500",
-      },
-      {
-        title: "For Foreign Authors",
-        price: "$25",
-      },
-    ];
+  const registeration = [
+    {
+      title: "For Academicians, Students, Research Scholars",
+      price: "₹1000",
+    },
+    {
+      title: "For Industry Participants",
+      price: "₹1500",
+    },
+    {
+      title: "For Foreign Authors",
+      price: "$25",
+    },
+  ];
   return (
     <LandingPageLayout>
       <div className="p-4 md:px-16 lg:max-w-6xl lg:mx-auto min-h-[calc(100vh-400px)]">
@@ -50,7 +49,7 @@ const Registration = () => {
             <p>Those who got acceptance, kindly register here</p>
             <p>👇</p>
             <Button
-              // onClick={() => signIn("google")}
+              onClick={() => signIn("google")}
               className="uppercase tracking-wider"
             >
               Register

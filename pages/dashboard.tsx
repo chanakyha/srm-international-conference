@@ -4,7 +4,16 @@ import { db } from "@/backend/firebase";
 import AddPaperDialog from "@/components/dashboard/AddPaperDialog";
 import { Button } from "@/components/ui/button";
 import LandingPageLayout from "@/layout/LandingPageLayout";
-import { Timestamp, collection, doc, getDoc, getDocs, onSnapshot, query } from "firebase/firestore";
+import {
+  Timestamp,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 import { getSession, signOut } from "next-auth/react";
 import Image from "next/image";
 
@@ -26,30 +35,28 @@ interface User {
   paperId: string;
 }
 
-
 interface DashboardProps {
-  user: User | null,
+  user: User | null;
 }
 
-function Dashboard({user}: DashboardProps) {
-
+function Dashboard({ user }: DashboardProps) {
   const [paper, setPaper] = useState<any>(null);
-  console.log(user);
+  // console.log(user);
   // console.log(paper);
   // console.log(createdAt)
-
+  // console.log(paper);
   useEffect(() => {
-    if (user?.paperId){
-
-      const unsub = onSnapshot(doc(db, "papers", user?.paperId), (doc) => {
-        if (doc.exists()){
-          setPaper({data:doc.data(),id:doc.id});
-        }
-      });
-      return () => unsub();
-    }
-    
-  }, [user?.paperId]);
+    // if (user?.paperId) {
+    const unsub = onSnapshot(
+      query(collection(db, "papers"), where("firstAuthor", "==", user?.email)),
+      (docs) => {
+        if (docs.docs.length === 0) setPaper(null);
+        else setPaper({ id: docs.docs[0].id, ...docs.docs[0].data() });
+      }
+    );
+    return () => unsub();
+    // }
+  }, []);
   return (
     <LandingPageLayout>
       <main
@@ -76,8 +83,8 @@ function Dashboard({user}: DashboardProps) {
                   </div>
                 </div>
                 <div>
-                  <Button  onClick={() => signOut()} variant={"ghost"}>
-                    <LogOutIcon  />
+                  <Button onClick={() => signOut()} variant={"ghost"}>
+                    <LogOutIcon />
                   </Button>
                 </div>
               </div>
@@ -94,7 +101,7 @@ function Dashboard({user}: DashboardProps) {
                 {user?.paperUpload && <AddAuthorsDialog />}
               </div>
               <div>
-                <TableData user={user} paper={paper}  />
+                <TableData user={user} paper={paper} />
               </div>
               <div>{user?.paperUpload && <CommentsSection />}</div>
             </div>
@@ -153,7 +160,7 @@ export async function getServerSideProps(context: any) {
   const user: any = session ? { user: docSnap.data() } : null;
   return {
     props: {
-      ...user
+      ...user,
     },
   };
 }

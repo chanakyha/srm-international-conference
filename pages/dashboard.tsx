@@ -14,11 +14,8 @@ import {
 } from "firebase/firestore";
 import { getSession, signOut } from "next-auth/react";
 import Image from "next/image";
-
-import TableData from "@/components/organizer/PaperTableData";
 import { LogOutIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import PaperTableData from "@/components/organizer/PaperTableData";
 import ReviewTableData from "@/components/dashboard/ReviewTableData";
 
 interface User {

@@ -9,6 +9,26 @@ import {
 } from "@/components/ui/table";
 import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "@/backend/firebase";
+import Link from "next/link";
+import AddCommentsDialog from "./AddCommentsDialog";
+
+interface User {
+  email: string;
+  registered: boolean;
+  name: string;
+  mobile: string;
+  category: string;
+  organization: string;
+  picture: string;
+  paperUpload: boolean;
+  paperId: string;
+  reviewerName: string;
+  reviewerEmail: string;
+}
+
+interface DashboardProps {
+  user: User | null;
+}
 
 interface PaperProps {
   abstract: string;
@@ -25,15 +45,16 @@ interface PaperProps {
 }
 [];
 
-const ReviewTableData = () => {
+const ReviewTableData = ({user}:DashboardProps) => {
   const [papers, setPapers] = useState<PaperProps[]>([]);
 
+  console.log(papers);
 
-  //change to reviewer thingggy
+
   useEffect(() => {
     const colRef = query(
       collection(db, "papers"),
-      where("assignedReviewerName", "!=", "")
+      where("assignedReviewerEmail", "==", user?.reviewerEmail)
     );
     const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
       const papers: any = [];
@@ -70,7 +91,10 @@ const ReviewTableData = () => {
               Uploaded Date
             </TableHead>
             <TableHead className="font-bold text-center w-[250px]">
-              Assigned To
+              Comments
+            </TableHead>
+            <TableHead className="font-bold text-center w-[250px]">
+              Status
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -80,7 +104,9 @@ const ReviewTableData = () => {
               <TableCell width={200} className="font-medium text-center">
                 {paper.id}
               </TableCell>
-              <TableCell>{paper.title}</TableCell>
+              <TableCell>
+                <Link className="hover:underline"  href={paper.fileUrl} target={"_blank"}>{paper.title}</Link>
+              </TableCell>
               <TableCell width={300} className="text-center">
                 {paper.track}
               </TableCell>
@@ -88,7 +114,10 @@ const ReviewTableData = () => {
                 {paper.createdAt.toDate().toLocaleDateString()}
               </TableCell>
               <TableCell className="text-center">
-                {paper.assignedReviewerName}
+                <AddCommentsDialog id={paper.id}/>
+              </TableCell>
+              <TableCell className="text-center">
+                {paper.status}
               </TableCell>
             </TableRow>
           ))}

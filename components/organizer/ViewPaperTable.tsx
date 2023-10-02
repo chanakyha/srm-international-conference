@@ -26,7 +26,7 @@ interface PaperProps {
 }
 [];
 
-const ViewPaperTableData = () => {
+const ViewPaperTable = () => {
     const [papers, setPapers] = useState<PaperProps[]>([]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const ViewPaperTableData = () => {
     return () => unsubscribe();
   }, []);
 
-  console.log(papers);
+  console.log("hghh");
 
   return (
     <div suppressHydrationWarning className="">
@@ -97,4 +97,4 @@ const ViewPaperTableData = () => {
   );
 };
 
-export default ViewPaperTableData;
+export default ViewPaperTable;

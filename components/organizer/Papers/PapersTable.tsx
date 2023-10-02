@@ -27,7 +27,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { columns } from "./columns";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "@/backend/firebase";
 
 interface PaperProps {
@@ -71,15 +71,18 @@ const PapersTable: React.FC = () => {
     }, [table]);
 
     useEffect(() => {
-        const colRef = collection(db, "papers");
-        const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
-            const papers: any = [];
-            querySnapshot.forEach((doc) => {
-                papers.push({ ...doc.data(), id: doc.id });
-            });
-            setPapers(papers);
+      const colRef = query(
+        collection(db, "papers"),
+        where("assignedReviewerName", "==", "")
+      );
+      const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
+        const papers: any = [];
+        querySnapshot.forEach((doc) => {
+          papers.push({ ...doc.data(), id: doc.id });
         });
-        return () => unsubscribe();
+        setPapers(papers);
+      });
+      return () => unsubscribe();
     }, []);
 
     // console.log(table.getRowModel().rows.map((row) => row._valuesCache));

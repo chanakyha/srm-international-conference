@@ -28,6 +28,8 @@ interface User {
   picture: string;
   paperUpload: boolean;
   paperId: string;
+  reviewerName: string;
+  reviewerEmail: string;
 }
 
 interface DashboardProps {
@@ -74,7 +76,7 @@ function Dashboard({ user }: DashboardProps) {
                 </h1>
               </div>
               <div>
-                <ReviewTableData/>
+                <ReviewTableData user={user}/>
               </div>
               {/* <div>{user?.paperUpload && <CommentsSection />}</div> */}
             </div>

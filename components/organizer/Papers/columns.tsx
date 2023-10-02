@@ -49,7 +49,7 @@ export const columns: ColumnDef<PaperProps>[] = [
         cell: ({ row }) => {
             return (
                 <AssignCombo
-                    tt={row.getValue("assignedReviewerName")}
+                    // tt={row.getValue("assignedReviewerName")}
                     id={row.getValue("id")}
                 />
             );

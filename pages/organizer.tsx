@@ -10,7 +10,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PapersTable from "@/components/organizer/Papers/PapersTable";
 import ReviewersTable from "@/components/organizer/Reviewer/ReviewersTable";
 import AddReveiwersDialog from "@/components/organizer/AddReveiwersDialog";
-// import ViewPaperTable from "@/components/organizer/ViewPaperTable";
+import ViewPaperTable from "@/components/organizer/ViewPaperTable";
+
 
 function Organizer() {
   const { data: session } = useSession();
@@ -75,7 +76,7 @@ function Organizer() {
                     <ReviewersTable />
                   </TabsContent>
                   <TabsContent value="Papers">
-                    {/* <ViewPaperTable/> */}
+                    <ViewPaperTable/>
                   </TabsContent>
                   <TabsContent value="Payment">
                     <PaymentTableData />

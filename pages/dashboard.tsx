@@ -103,7 +103,9 @@ function Dashboard({ user }: DashboardProps) {
               <div>
                 <TableData user={user} paper={paper} />
               </div>
-              <div>{user?.paperUpload && <CommentsSection />}</div>
+              <div>
+                {user?.paperUpload && <CommentsSection paper={paper} />}
+              </div>
             </div>
           </header>
         </section>

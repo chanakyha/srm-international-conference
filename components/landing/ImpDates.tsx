@@ -42,11 +42,11 @@ const ImpDates = () => {
                     Important Dates
                 </h1>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+            <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                 {
                     IMPDATES.map((card,idx) => (
 
-                        <div key={idx} className="w-full p-4 lg:h-full">
+                        <div key={idx} className="w-full lg:h-full">
                             <div className="w-full h-full flex flex-col gap-4 bg-[url('/assets/CardWave.svg')] bg-opacity-5 bg-cover bg-bottom bg-no-repeat shadow-md rounded-md p-4 lg:p-12">
                                 <div className="text-center lg:text-left flex flex-col gap-2">
                                     <p className="text-base lg:text-xl font-medium lg:w-44">

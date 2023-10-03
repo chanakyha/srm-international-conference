@@ -16,8 +16,6 @@ import {
 } from "firebase/firestore";
 import { getSession, signOut } from "next-auth/react";
 import Image from "next/image";
-
-import AddAuthorsDialog from "@/components/dashboard/AddAuthorsDialog";
 import TableData from "@/components/dashboard/TableData";
 import CommentsSection from "@/components/dashboard/CommentsSection";
 import { LogOutIcon } from "lucide-react";
@@ -92,13 +90,6 @@ function Dashboard({ user }: DashboardProps) {
                 <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
                   Dashboard
                 </h1>
-                {/* <p className="mt-1.5 text-sm text-gray-500">
-                  Your website has seen a 52% increase in traffic in the last
-                  month. Keep it up! 🚀
-                </p> */}
-              </div>
-              <div className="flex gap-2">
-                {user?.paperUpload && <AddAuthorsDialog />}
               </div>
               <div>
                 <TableData user={user} paper={paper} />

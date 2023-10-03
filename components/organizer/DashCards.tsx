@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { collection, getCountFromServer, onSnapshot } from 'firebase/firestore';
+import { collection, getCountFromServer, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '@/backend/firebase';
 
 interface CountProps {
   userCount: number,
   paperCount: number,
-  reviewerCount: number
+  reviewerCount: number,
+  acceptedPaperCount: number,
 };
 
 const DashCards = () => {
@@ -49,6 +50,21 @@ const DashCards = () => {
         setCount((count) => ({
             ...count,
             reviewerCount: querySnapshot.docs.length,
+        }));
+    });
+    return () => unsubscribe();
+  },[])
+
+  useEffect(() => {
+    const colRef = query(
+      collection(db, "papers"),
+      where("status", "==", "accepted")
+    );
+    const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
+        querySnapshot.docs.length;
+        setCount((count) => ({
+            ...count,
+            acceptedPaperCount: querySnapshot.docs.length,
         }));
     });
     return () => unsubscribe();
@@ -147,7 +163,7 @@ const DashCards = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">1573</div>
+          <div className="text-2xl font-bold">{count?.acceptedPaperCount}</div>
           <p className="text-xs text-muted-foreground">
             Total No of Accepted Papers
           </p>

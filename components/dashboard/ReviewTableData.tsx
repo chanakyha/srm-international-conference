@@ -11,6 +11,7 @@ import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "@/backend/firebase";
 import Link from "next/link";
 import AddCommentsDialog from "./AddCommentsDialog";
+import CommentsDropMenu from "./CommentsDropMenu";
 
 interface User {
   email: string;
@@ -114,7 +115,7 @@ const ReviewTableData = ({user}:DashboardProps) => {
                 {paper.createdAt.toDate().toLocaleDateString()}
               </TableCell>
               <TableCell className="text-center">
-                <AddCommentsDialog id={paper.id}/>
+                <CommentsDropMenu id={paper.id} />
               </TableCell>
               <TableCell className="text-center">
                 {paper.status}

@@ -38,15 +38,6 @@ const AddCommentsDialog = ({id}:any) => {
 
         ),
       });
-    //   await setDoc(
-    //     docRef,
-    //     { ...newReviewer, assignedPapers:[]},
-    //     { merge: true }
-    //   ).then(() => {
-    //     alert("Reviewer Added Successfully");
-    //   }).catch(() => {
-    //     alert("Error adding document: ");
-    //   });
     }
   };
   return (

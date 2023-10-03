@@ -11,7 +11,10 @@ import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "@/backend/firebase";
 import Link from "next/link";
 import AddCommentsDialog from "./AddCommentsDialog";
-import CommentsDropMenu from "./CommentsDropMenu";
+import { Button } from "../ui/button";
+import ConfirmPaperAcceptAlert from "./ConfirmPaperAcceptAlert";
+import ConfirmPaperRejectAlert from "./ConfirmPaperRejectAlert";
+import { Label } from "../ui/label";
 
 interface User {
   email: string;
@@ -106,7 +109,13 @@ const ReviewTableData = ({user}:DashboardProps) => {
                 {paper.id}
               </TableCell>
               <TableCell>
-                <Link className="hover:underline"  href={paper.fileUrl} target={"_blank"}>{paper.title}</Link>
+                <Link
+                  className="hover:underline"
+                  href={paper.fileUrl}
+                  target={"_blank"}
+                >
+                  {paper.title}
+                </Link>
               </TableCell>
               <TableCell width={300} className="text-center">
                 {paper.track}
@@ -115,10 +124,19 @@ const ReviewTableData = ({user}:DashboardProps) => {
                 {paper.createdAt.toDate().toLocaleDateString()}
               </TableCell>
               <TableCell className="text-center">
-                <CommentsDropMenu id={paper.id} />
+                <AddCommentsDialog id={paper.id} />
               </TableCell>
               <TableCell className="text-center">
-                {paper.status}
+                {
+                  paper.status === "review" ? (
+                    <div className="flex gap-2">
+                      <ConfirmPaperAcceptAlert id={paper.id} />
+                      <ConfirmPaperRejectAlert id={paper.id} />
+                    </div>
+                  ) : paper.status === "accepted" ? (
+                    <Label className="text-green-500 font-semibold capitalize">{paper.status}</Label>
+                  ) : <Label className="text-red-500 font-semibold capitalize">{paper.status}</Label>
+                }
               </TableCell>
             </TableRow>
           ))}

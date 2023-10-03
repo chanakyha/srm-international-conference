@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "@/backend/firebase";
+import { Label } from "../ui/label";
 
 
 interface PaperProps {
@@ -71,6 +72,9 @@ const ViewPaperTable = () => {
             <TableHead className="font-bold text-center w-[250px]">
               Assigned To
             </TableHead>
+            <TableHead className="font-bold text-center w-[250px]">
+              Status
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -86,8 +90,23 @@ const ViewPaperTable = () => {
               <TableCell className="text-center">
                 {paper.createdAt.toDate().toLocaleDateString()}
               </TableCell>
-              <TableCell className="text-center">
+              <TableCell className="text-center capitalize">
                 {paper.assignedReviewerName}
+              </TableCell>
+              <TableCell className="text-center">
+                {paper.status === "review" ? (
+                  <Label className="text-yellow-500 font-semibold capitalize">
+                    Under Review
+                  </Label>
+                ) : paper.status === "accepted" ? (
+                  <Label className="text-green-500 font-semibold capitalize">
+                    {paper.status}
+                  </Label>
+                ) : (
+                  <Label className="text-red-500 font-semibold capitalize">
+                    {paper.status}
+                  </Label>
+                )}
               </TableCell>
             </TableRow>
           ))}

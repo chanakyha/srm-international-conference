@@ -166,7 +166,7 @@ const PapersTable: React.FC = () => {
                                 {row.getVisibleCells().map((cell) => (
                                     <TableCell
                                         key={cell.id}
-                                        className="text-xs text-center"
+                                        className="text-sm text-center"
                                     >
                                         {flexRender(
                                             cell.column.columnDef.cell,

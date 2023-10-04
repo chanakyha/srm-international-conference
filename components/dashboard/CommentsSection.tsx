@@ -2,6 +2,7 @@ import React from "react";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import ReuploadDialog from "./ReuploadDialog";
 
 const CommentsSection = ({ paper }: any) => {
 
@@ -34,12 +35,7 @@ const CommentsSection = ({ paper }: any) => {
                                 <div className="mt-4 flex items-center gap-2">
                                     {comment.reupload && (
                                         <div>
-                                            <Button
-                                                variant={"default"}
-                                                size="sm"
-                                            >
-                                                Re-Upload
-                                            </Button>
+                                            <ReuploadDialog id={paper.id}/>
                                         </div>
                                     )}
                                     <div>

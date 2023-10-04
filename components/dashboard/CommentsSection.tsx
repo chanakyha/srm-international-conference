@@ -24,7 +24,8 @@ const CommentsSection = ({ paper }: any) => {
                                 className="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed"
                             >
                                 <span className="font-bold mr-2">
-                                    {paper.assignedReviewerName}
+                                    {/* {paper.assignedReviewerName} */}
+                                    Reviewer
                                 </span>
                                 <span className="text-xs text-gray-400">
                                     {comment.createdAt
@@ -38,7 +39,7 @@ const CommentsSection = ({ paper }: any) => {
                                             <ReuploadDialog id={paper.id}/>
                                         </div>
                                     )}
-                                    <div>
+                                    {/* <div>
                                         <Button
                                             asChild
                                             variant={"outline"}
@@ -50,7 +51,7 @@ const CommentsSection = ({ paper }: any) => {
                                                 Reply via Email
                                             </Link>
                                         </Button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         ))}

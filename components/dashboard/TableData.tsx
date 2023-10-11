@@ -11,7 +11,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 import { getSession, useSession } from "next-auth/react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/backend/firebase";
 import AddPaperDialog from "./AddPaperDialog";
 
@@ -19,6 +19,19 @@ const TableData = ({ user, paper }: any) => {
     // console.log(user);
 
     console.log(paper);
+    const handlePayment = async (id: any) => {
+        const docRef = doc(db, "papers", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const docRef = doc(db, "papers", id);
+            await updateDoc(docRef, {
+                paid: true,
+            });
+            alert("Payment Successful");
+        } else {
+            alert("Paper does not exist");
+        }
+    };
 
     return (
         <div suppressHydrationWarning className="">
@@ -83,6 +96,7 @@ const TableData = ({ user, paper }: any) => {
                                     <Button
                                         className="text-sm"
                                         variant={"default"}
+                                        onClick={()=>handlePayment(paper?.id)}
                                     >
                                         Pay Now
                                     </Button>

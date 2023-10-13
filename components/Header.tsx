@@ -55,7 +55,7 @@ function Header() {
     },
   ];
   return (
-    <header className="p-4 sticky top-0 bg-white z-50 flex items-center justify-between md:px-16 lg:max-w-8xl lg:mx-auto">
+    <header className="px-4 md:p-0 sticky top-0 bg-white z-50 flex items-center justify-between md:px-16 lg:max-w-8xl lg:mx-auto">
       <Link href={"/"}>
         <Image
           src={"/assets/icacst23-1.png"}

@@ -21,7 +21,7 @@ import AddAuthorsDialog from "@/components/dashboard/AddAuthorsDialog";
 import TableData from "@/components/dashboard/TableData";
 import CommentsSection from "@/components/dashboard/CommentsSection";
 import { LogOutIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 
 interface User {
   email: string;
@@ -97,13 +97,26 @@ function Dashboard({ user }: DashboardProps) {
                   month. Keep it up! 🚀
                 </p> */}
               </div>
-              <div className="flex gap-2">
-                {user?.paperUpload && <AddAuthorsDialog />}
-              </div>
+              {/* <div className="flex gap-2">
+                {user?.paperUpload && <AddAuthorsDialog id={paper?.id} />}
+              </div> */}
+              {/* <div className="flex gap-2 flex-row">
+                {user?.paperUpload && paper?.authors.length > 1 && (
+                  <div className="flex gap-2">
+                    {paper?.authors.map((author: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined,idx: Key | null | undefined) => (
+                      <div key={idx}>
+                        <p className="text-sm">{idx != null ? (Number(idx) + 1) : ''} {author}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div> */}
               <div>
                 <TableData user={user} paper={paper} />
               </div>
-              <div>{user?.paperUpload && <CommentsSection />}</div>
+              <div>
+                {user?.paperUpload && <CommentsSection paper={paper} />}
+              </div>
             </div>
           </header>
         </section>

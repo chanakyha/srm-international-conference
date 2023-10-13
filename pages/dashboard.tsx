@@ -22,6 +22,7 @@ import TableData from "@/components/dashboard/TableData";
 import CommentsSection from "@/components/dashboard/CommentsSection";
 import { LogOutIcon } from "lucide-react";
 import { JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import Head from "next/head";
 
 interface User {
   email: string;
@@ -58,49 +59,55 @@ function Dashboard({ user }: DashboardProps) {
     // }
   }, []);
   return (
-    <LandingPageLayout>
-      <main
-        suppressHydrationWarning
-        className="min-h-[calc(100vh-5rem)] font-montserrat "
-      >
-        <section suppressHydrationWarning>
-          <header className="">
-            <div className="mx-auto flex flex-col gap-8 max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-              <div className="flex items-center sm:justify-between sm:gap-4">
-                <div className="flex flex-1 items-center justify-between gap-8 sm:justify-end">
-                  <div className="group flex shrink-0 items-center rounded-lg transition">
-                    <Image
-                      alt="Photo"
-                      width={100}
-                      height={100}
-                      src={user?.picture!}
-                      className="h-10 w-10 rounded-full"
-                    />
-                    <p className="ms-2 hidden text-left text-xs sm:block">
-                      <strong className="block font-bold">{user?.name}</strong>
-                      <span className="text-gray-500"> {user?.email} </span>
-                    </p>
+    <>
+    <Head>
+        <title>ICACST 2023 | Dashboard</title>
+    </Head>
+      <LandingPageLayout>
+        <main
+          suppressHydrationWarning
+          className="min-h-[calc(100vh-5rem)] font-montserrat "
+        >
+          <section suppressHydrationWarning>
+            <header className="">
+              <div className="mx-auto flex flex-col gap-8 max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+                <div className="flex items-center sm:justify-between sm:gap-4">
+                  <div className="flex flex-1 items-center justify-between gap-8 sm:justify-end">
+                    <div className="group flex shrink-0 items-center rounded-lg transition">
+                      <Image
+                        alt="Photo"
+                        width={100}
+                        height={100}
+                        src={user?.picture!}
+                        className="h-10 w-10 rounded-full"
+                      />
+                      <p className="ms-2 hidden text-left text-xs sm:block">
+                        <strong className="block font-bold">
+                          {user?.name}
+                        </strong>
+                        <span className="text-gray-500"> {user?.email} </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <Button onClick={() => signOut()} variant={"ghost"}>
+                      <LogOutIcon />
+                    </Button>
                   </div>
                 </div>
-                <div>
-                  <Button onClick={() => signOut()} variant={"ghost"}>
-                    <LogOutIcon />
-                  </Button>
-                </div>
-              </div>
-              <div className="">
-                <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-                  Dashboard
-                </h1>
-                {/* <p className="mt-1.5 text-sm text-gray-500">
+                <div className="">
+                  <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+                    Dashboard
+                  </h1>
+                  {/* <p className="mt-1.5 text-sm text-gray-500">
                   Your website has seen a 52% increase in traffic in the last
                   month. Keep it up! 🚀
                 </p> */}
-              </div>
-              {/* <div className="flex gap-2">
+                </div>
+                {/* <div className="flex gap-2">
                 {user?.paperUpload && <AddAuthorsDialog id={paper?.id} />}
               </div> */}
-              {/* <div className="flex gap-2 flex-row">
+                {/* <div className="flex gap-2 flex-row">
                 {user?.paperUpload && paper?.authors.length > 1 && (
                   <div className="flex gap-2">
                     {paper?.authors.map((author: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined,idx: Key | null | undefined) => (
@@ -111,17 +118,18 @@ function Dashboard({ user }: DashboardProps) {
                   </div>
                 )}
               </div> */}
-              <div>
-                <TableData user={user} paper={paper} />
+                <div>
+                  <TableData user={user} paper={paper} />
+                </div>
+                <div>
+                  {user?.paperUpload && <CommentsSection paper={paper} />}
+                </div>
               </div>
-              <div>
-                {user?.paperUpload && <CommentsSection paper={paper} />}
-              </div>
-            </div>
-          </header>
-        </section>
-      </main>
-    </LandingPageLayout>
+            </header>
+          </section>
+        </main>
+      </LandingPageLayout>
+    </>
   );
 }
 

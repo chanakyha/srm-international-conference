@@ -1,4 +1,5 @@
 import LandingPageLayout from "@/layout/LandingPageLayout";
+import Head from "next/head";
 import React from "react";
 
 const committeeMembers = [
@@ -137,6 +138,10 @@ const coConvenor = [
 
 export const Committee = () => {
   return (
+    <>
+    <Head>
+      <title>ICACST 2023 | Committee</title>
+    </Head>
     <LandingPageLayout>
       <div className="w-11/12 md:w-[80%] lg:py-16 mx-auto max-w-7xl min-h-[calc(100vh-5rem)]">
         <div>
@@ -242,6 +247,7 @@ export const Committee = () => {
         </div>
       </div>
     </LandingPageLayout>
+    </>
   );
 };
 

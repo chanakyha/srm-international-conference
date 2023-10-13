@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+
+import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
@@ -10,9 +10,8 @@ export default function App({
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-      {/* <Header /> */}
       <Component {...pageProps} />
-      {/* <Footer /> */}
+      <Toaster />
     </SessionProvider>
   );
 }

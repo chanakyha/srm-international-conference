@@ -17,11 +17,13 @@ import { db } from "@/backend/firebase";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { useRouter } from "next/router";
+import { useToast } from "./ui/use-toast";
 
 function Register() {
   const [category, setCategory] = useState<String>("");
   const { data: session } = useSession();
   const router = useRouter();
+  const toast = useToast();
 
   const addNewUser = async (e: any) => {
     e.preventDefault();
@@ -39,9 +41,20 @@ function Register() {
       docRef,
       { ...newUser, registered: true, firstAuthor: false },
       { merge: true }
-    );
-    router.push("/dashboard");
-    alert("Registered Successfully");
+    ).then(() => {
+        router.push("/dashboard");
+        // toast({
+        //     title: "Registered Successfully",
+        //     description: "You have been registered successfully.",
+        // });
+        alert("Registered Successfully")
+        }).catch((err) => {
+            // toast({
+            //     title: "Registration Failed",
+            //     description: "Please try again later.",
+            // });
+            alert("Registration Failed");
+        });
   };
   return (
       <div className="mx-auto w-full h-full">

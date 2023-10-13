@@ -1,4 +1,5 @@
 import LandingPageLayout from "@/layout/LandingPageLayout";
+import Head from "next/head";
 import React from "react";
 
 const PublicationsPage = () => {
@@ -8,6 +9,10 @@ const PublicationsPage = () => {
         "All presented papers will be published in SCI / SCOPUS / WOS / UGC CARE based on author's interest.",
     ];
     return (
+        <>
+        <Head>
+            <title>ICACST 2023 | Publications</title>
+        </Head>
         <LandingPageLayout>
             <div className="p-4 md:px-16 lg:max-w-7xl lg:mx-auto min-h-[calc(100vh-5rem)]">
                 <h1 className="text-xl lg:text-4xl font-bold text-center my-10">
@@ -24,6 +29,7 @@ const PublicationsPage = () => {
                 </div>
             </div>
         </LandingPageLayout>
+        </>
     );
 }
 

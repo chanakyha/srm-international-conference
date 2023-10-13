@@ -20,17 +20,18 @@ const TableData = ({ user, paper }: any) => {
 
     console.log(paper);
     const handlePayment = async (id: any) => {
-        const docRef = doc(db, "papers", id);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            const docRef = doc(db, "papers", id);
-            await updateDoc(docRef, {
-                paid: true,
-            });
-            alert("Payment Successful");
-        } else {
-            alert("Paper does not exist");
-        }
+        // const docRef = doc(db, "papers", id);
+        // const docSnap = await getDoc(docRef);
+        // if (docSnap.exists()) {
+        //     const docRef = doc(db, "papers", id);
+        //     await updateDoc(docRef, {
+        //         paid: true,
+        //     });
+        //     alert("Payment Successful");
+        // } else {
+        //     alert("Paper does not exist");
+        // }
+        alert("Payment Error")
     };
 
     return (

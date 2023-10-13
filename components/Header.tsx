@@ -15,7 +15,7 @@ import { Menu } from "lucide-react";
 import Image from "next/image";
 
 function Header() {
-  const router = useRouter();
+  
   const { data: session } = useSession();
 
   interface NavLinks {
@@ -107,9 +107,15 @@ function Header() {
                   className="font-bold px-8 py-2 lg:flex flex-row hidden"
                   // onClick={() => signIn("google")}
                 >
-                  <Link href="/registration" className="text-mont">
-                    Registration
-                  </Link>
+                  {session ? (
+                    <Link href="/dashboard" className="text-mont">
+                      Dashboard
+                    </Link>
+                  ) : (
+                    <Link href="/registration" className="text-mont">
+                      Registration
+                    </Link>
+                  )}
                 </Button>
               </SheetDescription>
             </SheetHeader>
@@ -130,9 +136,15 @@ function Header() {
           className="font-bold px-8 py-2 lg:flex flex-row hidden"
           // onClick={() => signIn("google")}
         >
-          <Link href="/registration" className="text-mont">
-            Registration
-          </Link>
+          {session ? (
+            <Link href="/dashboard" className="text-mont">
+              Dashboard
+            </Link>
+          ) : (
+            <Link href="/registration" className="text-mont">
+              Registration
+            </Link>
+          )}
         </Button>
         {/* )} */}
       </div>

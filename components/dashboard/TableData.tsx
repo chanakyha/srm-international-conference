@@ -13,7 +13,6 @@ import { Button } from "../ui/button";
 import { getSession, useSession } from "next-auth/react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/backend/firebase";
-import { easebuzzPayment } from "@/backend/payment";
 import AddPaperDialog from "./AddPaperDialog";
 
 const TableData = ({ user, paper }: any) => {
@@ -36,7 +35,6 @@ const TableData = ({ user, paper }: any) => {
     // } else if (user?.category === "Foreign Author") {
     //   alert("Please contact the organizers for payment details");
     // }
-
     // const docRef = doc(db, "papers", id);
     // const docSnap = await getDoc(docRef);
     // if (docSnap.exists()) {

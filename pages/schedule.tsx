@@ -1,35 +1,36 @@
-import LandingPageLayout from '@/layout/LandingPageLayout';
-import Head from 'next/head';
-import React from 'react'
+import LandingPageLayout from "@/layout/LandingPageLayout";
+import Head from "next/head";
+import React from "react";
 
 interface ScheduleProps {
-  key: any,
-  title: string,
-  desc: string,
-  pos: string,
-}[];
+  key: any;
+  title: string;
+  desc: string;
+  pos: string;
+}
+[];
 
 const SCHEDULE: ScheduleProps[] = [
   {
-    key: "20th Oct",
+    key: "04th Nov",
     title: "Paper Submission",
     pos: "right-timeline",
     desc: "Share your research with the world. Submit your papers within the deadline.",
   },
   {
-    key: "27th Oct",
+    key: "09th Nov",
     title: "Notification of Acceptance",
     pos: "left-timeline",
     desc: "Notification of acceptance will be sent to the authors.",
   },
   {
-    key: "4th Nov",
+    key: "14th Nov",
     title: "Camera Ready Copy Submission",
     pos: "right-timeline",
     desc: "Submit your camera ready copy within the deadline.",
   },
   {
-    key: "7th Nov",
+    key: "19th Nov",
     title: "Paper Registration",
     pos: "left-timeline",
     desc: "Pay and register for the conference within the deadline.",
@@ -46,7 +47,7 @@ const SCHEDULE: ScheduleProps[] = [
     pos: "left-timeline",
     desc: "Attend the conference on the given date.",
   },
-]; 
+];
 
 function Schedule() {
   return (
@@ -107,4 +108,4 @@ function Schedule() {
   );
 }
 
-export default Schedule
+export default Schedule;

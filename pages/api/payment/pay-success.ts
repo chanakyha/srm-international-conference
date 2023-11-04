@@ -1,4 +1,4 @@
-// export default async function handler(req, res) {
+export default async function handler(req:any, res:any) {
 //   if (req.body.status === "success") {
 //     const data = await req.body;
 //     var amount = data.amount;
@@ -25,4 +25,7 @@
 //         easypayid
 //     );
 //   }
-// }
+  if (req.body.status === "success") {
+res.redirect(302, "/dashboard");
+  }
+}

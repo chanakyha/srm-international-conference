@@ -14,37 +14,67 @@ import { getSession, useSession } from "next-auth/react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/backend/firebase";
 import AddPaperDialog from "./AddPaperDialog";
+import { easebuzzPayment } from "@/backend/payment";
 
 const TableData = ({ user, paper }: any) => {
   // console.log(user);
   //   const [amount, setAmount] = useState(0.0);
 
   console.log(paper);
-  const handlePayment = async (id: any) => {
-    // if (
-    //   user?.category === "Undergraduate" ||
-    //   user?.category === "Postgraduate" ||
-    //   user?.category === "Research Scholars" ||
-    //   user?.category === "Academicians"
-    // ) {
-    //   //   setAmount(1000.0);
-    //   easebuzzPayment(1.0, user.name, user.email, user.mobile, id);
-    // } else if (user?.category === "Industry") {
-    //   //   setAmount(1500.0);
-    //   easebuzzPayment(1500.0, user.name, user.email, user.mobile, id);
-    // } else if (user?.category === "Foreign Author") {
-    //   alert("Please contact the organizers for payment details");
-    // }
+  const showPaymentDetails = async (paper: any) => {
     // const docRef = doc(db, "papers", id);
     // const docSnap = await getDoc(docRef);
     // if (docSnap.exists()) {
-    //     const docRef = doc(db, "papers", id);
-    //     await updateDoc(docRef, {
-    //         paid: true,
-    //     });
-    //     alert("Payment Successful");
+    var paymentDetails = "";
+    paymentDetails += "Payment Details\n\n";
+    if (paper?.txnid) {
+      paymentDetails += "Transaction ID: " + paper?.txnid;
+    }
+    if (paper?.easypayid) {
+      paymentDetails +=
+        "\nPayment Gateway ID: " + paper?.easypayid;
+    }
+    if (paper?.payment_mode) {
+      paymentDetails += "\nPayment Mode: " + paper?.payment_mode;
+    }
+    if (paper?.bankrefnum) {
+      paymentDetails +=
+        "\nBank Reference Number: " + paper?.bankrefnum;
+    }
+    if (paper?.net_amount_debit) {
+      paymentDetails +=
+        "\nNet Amount Debit: " + paper?.net_amount_debit;
+    }
+      alert(paymentDetails);
     // } else {
-    //     alert("Paper does not exist");
+      // alert("Paper does not exist");
+    // }
+  };
+  const handlePayment = async (id: any) => {
+    if (
+      user?.category === "Undergraduate" ||
+      user?.category === "Postgraduate" ||
+      user?.category === "Research Scholars" ||
+      user?.category === "Academicians"
+    ) {
+      //   setAmount(1000.0);
+      easebuzzPayment(10.0, user.name, user.email, user.mobile, id);
+    } else if (user?.category === "Industry") {
+      //   setAmount(1500.0);
+      easebuzzPayment(1500.0, user.name, user.email, user.mobile, id);
+    } else if (user?.category === "Foreign Author") {
+      alert("Please contact the organizers for payment details");
+    }
+    // const docRef = doc(db, "papers", id);
+    // const docSnap = await getDoc(docRef);
+    // if (docSnap.exists()) {
+        // const docRef = doc(db, "papers", id);
+        // await updateDoc(docRef, {
+        //     paid: true,
+        // });
+        // alert("Payment Successful");
+    // } else {
+        // alert("Paper does not exist");
     // }
     // alert("Payment Error");
   };
@@ -101,7 +131,9 @@ const TableData = ({ user, paper }: any) => {
                   </Label>
                 )}
               </TableCell>
-              {paper?.status === "accepted" && (
+              {/* if paper.status == accepted and paper.paid == true then xx else */}
+              
+              {paper?.status === "accepted" && paper?.paid === false &&(
                 <TableCell className="text-center">
                   <Button
                     className="text-sm"
@@ -109,6 +141,17 @@ const TableData = ({ user, paper }: any) => {
                     onClick={() => handlePayment(paper?.id)}
                   >
                     Pay Now
+                  </Button>
+                </TableCell>
+              )}
+              {paper?.status === "accepted" && paper?.paid === true && (
+                <TableCell className="text-center">
+                  <Button
+                    className="text-sm text-green-500"
+                    variant={"link"}
+                    onClick={() => showPaymentDetails(paper)}
+                  >
+                    Paid
                   </Button>
                 </TableCell>
               )}

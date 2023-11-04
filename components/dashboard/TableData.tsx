@@ -58,7 +58,7 @@ const TableData = ({ user, paper }: any) => {
       user?.category === "Academicians"
     ) {
       //   setAmount(1000.0);
-      easebuzzPayment(10.0, user.name, user.email, user.mobile, id);
+      easebuzzPayment(1000.0, user.name, user.email, user.mobile, id);
     } else if (user?.category === "Industry") {
       //   setAmount(1500.0);
       easebuzzPayment(1500.0, user.name, user.email, user.mobile, id);

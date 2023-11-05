@@ -42,12 +42,10 @@ export const easebuzzPayment = async (
     name: name,
     email: email,
     phone: contact,
-    // surl: "https://texus.io/api/pay-success",
-    // furl: "https://texus.io/api/pay-error",
-    surl: "http://localhost:3000/api/payment/pay-success",
-    furl: "http://localhost:3000/api/payment/pay-error",
-    // surl: "https://test.texus.io/api/pay-success",
-    // furl: "https://test.texus.io/api/pay-error",
+    // surl: "http://localhost:3000/api/payment/pay-success",
+    // furl: "http://localhost:3000/api/payment/pay-error",
+    surl: "https://icacst23.in/api/payment/pay-success",
+    furl: "https://icacst23.in/api/payment/pay-error",
   };
   // var transaction = require('./easebuzz_transaction.js');
   // transaction.transaction(data, config, res);

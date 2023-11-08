@@ -12,25 +12,25 @@ interface ScheduleProps {
 
 const SCHEDULE: ScheduleProps[] = [
   {
-    key: "04th Nov",
+    key: "15th Nov",
     title: "Paper Submission",
     pos: "right-timeline",
     desc: "Share your research with the world. Submit your papers within the deadline.",
   },
   {
-    key: "09th Nov",
+    key: "20th Nov",
     title: "Notification of Acceptance",
     pos: "left-timeline",
     desc: "Notification of acceptance will be sent to the authors.",
   },
   {
-    key: "14th Nov",
+    key: "25th Nov",
     title: "Camera Ready Copy Submission",
     pos: "right-timeline",
     desc: "Submit your camera ready copy within the deadline.",
   },
   {
-    key: "19th Nov",
+    key: "30th Nov",
     title: "Paper Registration",
     pos: "left-timeline",
     desc: "Pay and register for the conference within the deadline.",

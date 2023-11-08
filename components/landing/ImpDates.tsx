@@ -9,19 +9,19 @@ interface ImpDatesProps {
 const IMPDATES: ImpDatesProps[] = [
   {
     title: "Paper Submission",
-    date: "04 November 2023",
+    date: "15 November 2023",
   },
   {
     title: "Notification of Acceptance",
-    date: "09 November 2023",
+    date: "20 November 2023",
   },
   {
     title: "Camera Ready Copy Submission",
-    date: "14 November 2023",
+    date: "25 November 2023",
   },
   {
     title: "Paper Registration",
-    date: "19 November 2023",
+    date: "30 November 2023",
   },
   {
     title: "Pre-conference Tutorial",

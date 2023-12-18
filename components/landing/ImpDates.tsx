@@ -29,7 +29,7 @@ const IMPDATES: ImpDatesProps[] = [
   },
   {
     title: "Conference",
-    date: "08 December 2023",
+    date: "29 December 2023",
   },
 ];
 const ImpDates = () => {

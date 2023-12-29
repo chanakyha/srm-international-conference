@@ -89,6 +89,19 @@ function Schedule() {
                 </Link>
               </Button>
             </div>
+            <div>
+              <Button
+                asChild
+                className="bg-black md:mx-auto md:w-fit text-white rounded-md font-bold px-8 py-2 "
+              >
+                <Link
+                  target="_blank"
+                  href="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3VBJ5dVVPQ8EEXqpvKZO8QVcDmqhgcpanSJI7SF4K2uMqLO4rYyrGNII2CRypo5-aohwE1TjatJgO/pubhtml"
+                >
+                  Track 3 - Details
+                </Link>
+              </Button>
+            </div>
           </div>
           <div className="relative wrap overflow-hidden p-10 h-full md:block hidden">
             <div className="border-2-2 absolute border-opacity-20 border-gray-700 h-full border left-1/2"></div>

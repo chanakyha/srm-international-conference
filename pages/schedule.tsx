@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import LandingPageLayout from "@/layout/LandingPageLayout";
 import Head from "next/head";
+import Link from "next/link";
 import React from "react";
 
 interface ScheduleProps {
@@ -60,6 +62,34 @@ function Schedule() {
           <h1 className="text-xl lg:text-4xl font-bold text-center my-10">
             Schedule
           </h1>
+          <div className="flex flex-col justify-center items-center gap-8">
+            <div>
+              <Button
+                asChild
+                className="bg-black md:mx-auto md:w-fit text-white rounded-md font-bold px-8 py-2 "
+              >
+                <Link
+                  target="_blank"
+                  href="https://docs.google.com/spreadsheets/d/e/2PACX-1vT8WYMvpmPI98jfIUjjRdXLpA6dbuFb0Bh_IjnM_wtTiwtO83FPEFtp0iH8Gzp3AkCDlYj2wiQYkQlE/pubhtml"
+                >
+                  Track 1 - Details
+                </Link>
+              </Button>
+            </div>
+            <div>
+              <Button
+                asChild
+                className="bg-black md:mx-auto md:w-fit text-white rounded-md font-bold px-8 py-2 "
+              >
+                <Link
+                  target="_blank"
+                  href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTsEm6qh2TtU6PjteB-sM5RS1O-GP3u5iUFNZ5MQT6wXzjbPAA5yqDN7YlXu16Dx9uc0Cv5eoOZTQkz/pubhtml"
+                >
+                  Track 2 - Details
+                </Link>
+              </Button>
+            </div>
+          </div>
           <div className="relative wrap overflow-hidden p-10 h-full md:block hidden">
             <div className="border-2-2 absolute border-opacity-20 border-gray-700 h-full border left-1/2"></div>
             {SCHEDULE.map((card, idx) => (

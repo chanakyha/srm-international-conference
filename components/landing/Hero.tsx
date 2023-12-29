@@ -34,8 +34,16 @@ function Hero() {
           asChild
           className="bg-black md:mx-auto md:w-fit text-white rounded-md font-bold px-8 py-2 "
         >
+          <Link target="_blank" href="/assets/Invite.pdf">
+            View Invitation
+          </Link>
+        </Button>
+        <Button
+          asChild
+          className="bg-black md:mx-auto md:w-fit text-white rounded-md font-bold px-8 py-2 "
+        >
           <Link target="_blank" href="/assets/icacst 254.pdf">
-            View Brouchure
+            View Brochure
           </Link>
         </Button>
       </div>
